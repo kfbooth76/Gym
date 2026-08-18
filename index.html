@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Gym</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gym">
+<meta name="theme-color" content="#12151A">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAK20lEQVR4nO3dMW4USRiAUbPyCZBIOAGQmdwH2QvsCQjIEBkBtyI3GXCUzdhgZcGyNvbM9HRX9fdeTk8xPX/VN2rZfvL02fPvFwBAyh9bLwAAWJ8AAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAEXW69AO53c321+DVff/q8+DWB/bDvdDx5+uz5960XwX+dYwB/ZSCBn9l3ejwCGMwaQ7jm6wDjs+80CYCBrD0chhGw73QJgEFsNRSGEbrsO20CYABbD8PWrw+sb+u53/r1EQAAkCQANjZKBY+yDuD8Rpn3UdZRJQAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ5dYLYD+W+LWerz99XmAlMC5zwigEACdb8vd5317LBsfemBNG4xEAJznXH/PwR0LYE3PCiAQARzv35mNzYw/MCaMSABxlrU3H5sbMzAkjEwAcbO3NxubGjMwJoxMAABAkADjIVt8yfLthJuaEGezqxwDfvv948jU+vHuzwEoAGJFz4oddBMASN/TXa+3lBgPgnLjL9I8Alrypa1wXgHU5J+42dQCc+82f/eYC1Dkn7jdtAKz1ps98cwHKnBO/N2UArP1mz3pzAaqcEw+bMgAAgNNMFwBbVdaMdQdQ5Jx4nOkCAAA4nQAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgKDLrRewB1++fjv63/79158LruQ0j/l/bLneU95nWNPoczLbvnOfVy9fLLiSHgFwJIcRwLZ+3ofFwOE8AjiCwx9gLPblwwmAA3z5+s2HDGBQ9ujDCAAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQLgAK9evrh49fLF1ssA4A726MMIgCP4gAGMxb58uMutFzCrnz9sX75+23AlAE0O/dMIgAWc8iG8ub5acCWnecz/Y8v1GnZmMfqczLbvcB4eAQBAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgKDpAuDDuzep1wXgMM6Jx5kuAACA000ZAGtX1mxVB1DnnHjYlAFwcbHemz3jTQXAOfGQaQPg4uL8b/qsNxWAfzkn7jd1AFxcnO/Nn/mmAvCDc+Jul1svYAm3N+Ht+4+LXQuA/XBO/N8uAuDWXm4KAOfhnPhh+kcArOv1p8+p14VjmBNmIAAAIEgAcLC1v2X4VsOMzAmjEwAcZa3NxqbGzMwJIxMAHO3cm45NjT0wJ4xKAHCSc20+NjX2xJwwol39GCDbuN2Ebq6vFrsW7I05YTQCgMXYlOBh5oRReAQAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBMDGRvm1oKOsAzi/UeZ9lHVUCQAACBIAA9i6grd+fWB9W8/91q+PABjGVsNgCKHLvtMmAAay9lAYQsC+0yUABrPWcBhC4JZ9p+nJ02fPv2+9CO52c321+DUNIPA79p0OAQAAQR4BAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACC/gGeeTvrvX73PQAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAK20lEQVR4nO3dMW4USRiAUbPyCZBIOAGQmdwH2QvsCQjIEBkBtyI3GXCUzdhgZcGyNvbM9HRX9fdeTk8xPX/VN2rZfvL02fPvFwBAyh9bLwAAWJ8AAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAEXW69AO53c321+DVff/q8+DWB/bDvdDx5+uz5960XwX+dYwB/ZSCBn9l3ejwCGMwaQ7jm6wDjs+80CYCBrD0chhGw73QJgEFsNRSGEbrsO20CYABbD8PWrw+sb+u53/r1EQAAkCQANjZKBY+yDuD8Rpn3UdZRJQAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAEDQ5dYLYD+W+LWerz99XmAlMC5zwigEACdb8vd5317LBsfemBNG4xEAJznXH/PwR0LYE3PCiAQARzv35mNzYw/MCaMSABxlrU3H5sbMzAkjEwAcbO3NxubGjMwJoxMAABAkADjIVt8yfLthJuaEGezqxwDfvv948jU+vHuzwEoAGJFz4oddBMASN/TXa+3lBgPgnLjL9I8Alrypa1wXgHU5J+42dQCc+82f/eYC1Dkn7jdtAKz1ps98cwHKnBO/N2UArP1mz3pzAaqcEw+bMgAAgNNMFwBbVdaMdQdQ5Jx4nOkCAAA4nQAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgKDLrRewB1++fjv63/79158LruQ0j/l/bLneU95nWNPoczLbvnOfVy9fLLiSHgFwJIcRwLZ+3ofFwOE8AjiCwx9gLPblwwmAA3z5+s2HDGBQ9ujDCAAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQLgAK9evrh49fLF1ssA4A726MMIgCP4gAGMxb58uMutFzCrnz9sX75+23AlAE0O/dMIgAWc8iG8ub5acCWnecz/Y8v1GnZmMfqczLbvcB4eAQBAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgKDpAuDDuzep1wXgMM6Jx5kuAACA000ZAGtX1mxVB1DnnHjYlAFwcbHemz3jTQXAOfGQaQPg4uL8b/qsNxWAfzkn7jd1AFxcnO/Nn/mmAvCDc+Jul1svYAm3N+Ht+4+LXQuA/XBO/N8uAuDWXm4KAOfhnPhh+kcArOv1p8+p14VjmBNmIAAAIEgAcLC1v2X4VsOMzAmjEwAcZa3NxqbGzMwJIxMAHO3cm45NjT0wJ4xKAHCSc20+NjX2xJwwol39GCDbuN2Ebq6vFrsW7I05YTQCgMXYlOBh5oRReAQAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBMDGRvm1oKOsAzi/UeZ9lHVUCQAACBIAA9i6grd+fWB9W8/91q+PABjGVsNgCKHLvtMmAAay9lAYQsC+0yUABrPWcBhC4JZ9p+nJ02fPv2+9CO52c321+DUNIPA79p0OAQAAQR4BAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACC/gGeeTvrvX73PQAAAABJRU5ErkJggg==">
+<style>
+:root{
+  --bg:#12151A; --surf:#1B2029; --surf2:#232B39; --line:#2E3644;
+  --tx:#E8ECF2; --mut:#8A96A6; --dim:#5B6675;
+  --push:#E0524B; --pull:#4C8FD6; --legs:#4CAF7D; --gold:#D9A441;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+  --pad:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+  font-size:16px;line-height:1.45;overscroll-behavior-y:none}
+body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+button,input,select{font-family:inherit;font-size:16px;color:inherit}
+button{background:none;border:none;cursor:pointer}
+a{color:var(--pull)}
+.hd{position:sticky;top:0;z-index:40;background:rgba(18,21,26,.96);
+  backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top)}
+.datebar{display:flex;align-items:center;gap:8px;padding:9px var(--pad)}
+.datebar .arw{width:40px;height:40px;border-radius:11px;background:var(--surf2);
+  display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--mut);flex:0 0 auto}
+.datebar .arw:active{background:var(--line)}
+.dwrap{flex:1;min-width:0;text-align:center}
+.dwrap .d1{font-size:15px;font-weight:650;letter-spacing:-.01em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.dwrap .d2{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.09em;margin-top:1px}
+.todaybtn{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--gold);border-radius:9px;padding:7px 9px;background:transparent}
+.wrap{padding:var(--pad);max-width:760px;margin:0 auto}
+.eyebrow{font-size:10.5px;font-weight:750;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+h2.scr{font-size:23px;font-weight:750;letter-spacing:-.02em;margin:2px 0 14px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:15px;margin-bottom:11px;overflow:hidden}
+.card.push{border-left:3px solid var(--push)} .card.pull{border-left:3px solid var(--pull)}
+.card.legs{border-left:3px solid var(--legs)}
+.ch{padding:12px 14px}
+.exname{font-size:16px;font-weight:680;letter-spacing:-.01em;line-height:1.25}
+.meta{font-size:12px;color:var(--mut);margin-top:3px;font-variant-numeric:tabular-nums}
+.tgtrow{display:flex;align-items:baseline;gap:9px;padding:2px 14px 10px}
+.tgt{font-family:var(--mono);font-size:40px;font-weight:700;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;line-height:1}
+.tgtlab{font-size:10.5px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.setrow{display:flex;align-items:center;gap:8px;padding:7px 14px;border-top:1px solid var(--line)}
+.setn{width:26px;font-family:var(--mono);font-size:12px;color:var(--dim);flex:0 0 auto;font-weight:600}
+.inp{flex:1;min-width:0;background:var(--surf2);border:1px solid var(--line);border-radius:10px;
+  padding:11px 8px;text-align:center;font-family:var(--mono);font-size:17px;font-weight:600;
+  font-variant-numeric:tabular-nums;outline:none;-moz-appearance:textfield}
+.inp::-webkit-outer-spin-button,.inp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.inp:focus{border-color:var(--mut);background:#28313F}
+.inp::placeholder{color:var(--dim);font-weight:500}
+.inp.filled{border-color:#3C4B5E;background:#252F3D}
+.x{font-size:11px;color:var(--dim);flex:0 0 auto}
+.drill{padding:11px 14px;border-top:1px solid var(--line)}
+.drill:first-child{border-top:none}
+.drill.pri{background:rgba(217,164,65,.07);border-left:2px solid var(--gold)}
+.drill.golf{background:rgba(76,175,125,.07);border-left:2px solid var(--legs)}
+.dn{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.dn b{font-size:14.5px;font-weight:650;flex:1 1 auto;min-width:0}
+.dose{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:600;
+  flex:0 1 auto;text-align:right;max-width:52%}
+.dhow{font-size:13.5px;color:var(--mut);margin-top:5px;line-height:1.5}
+.dcue{font-size:12.5px;color:var(--dim);margin-top:4px;font-style:italic}
+.vid{display:inline-block;margin-top:7px;font-size:12px;font-weight:650;color:var(--pull);
+  border:1px solid var(--line);border-radius:8px;padding:5px 9px;text-decoration:none}
+.btn{display:block;width:100%;padding:13px;border-radius:12px;background:var(--surf2);
+  border:1px solid var(--line);font-size:14px;font-weight:650;text-align:center;color:var(--tx)}
+.btn:active{background:var(--line)}
+.btn.gold{border-color:var(--gold);color:var(--gold)}
+.btn.on{background:var(--legs);border-color:var(--legs);color:#0E1B14}
+.btn.sm{padding:9px;font-size:13px}
+.row2{display:flex;gap:9px} .row2>*{flex:1}
+.seg{display:flex;background:var(--surf);border:1px solid var(--line);border-radius:12px;
+  padding:3px;gap:3px;margin-bottom:13px}
+.seg button{flex:1;padding:9px 4px;border-radius:9px;font-size:12.5px;font-weight:650;color:var(--mut)}
+.seg button.on{background:var(--surf2);color:var(--tx)}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;
+  background:rgba(18,21,26,.97);backdrop-filter:saturate(160%) blur(12px);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.nav button{flex:1;padding:9px 2px 8px;font-size:10px;font-weight:650;color:var(--dim);
+  letter-spacing:.02em;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav button.on{color:var(--tx)}
+.nav .ic{font-size:17px;line-height:1}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{text-align:center;font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.06em;padding:5px 0}
+.cell{aspect-ratio:1/1.12;background:var(--surf);border:1px solid var(--line);border-radius:9px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:4px 1px 2px;gap:2px;position:relative}
+.cell.off{opacity:.28}
+.cell.today{border-color:var(--gold);border-width:1.5px}
+.cell .dnum{font-family:var(--mono);font-size:11.5px;font-weight:650;color:var(--mut);font-variant-numeric:tabular-nums}
+.cell.today .dnum{color:var(--gold)}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid transparent}
+.cell .sl{font-family:var(--mono);font-size:8.5px;color:var(--dim);font-weight:650;line-height:1}
+.cell .wt{font-family:var(--mono);font-size:8.5px;color:var(--gold);font-weight:650;line-height:1}
+.cell .rest{font-size:8.5px;color:var(--dim);line-height:1}
+.stat{display:flex;gap:9px;margin-top:13px}
+.stat>div{flex:1;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:11px 9px;text-align:center}
+.stat .v{font-family:var(--mono);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat .l{font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.09em;margin-top:2px}
+.note{font-size:13px;color:var(--mut);line-height:1.55}
+.warn{background:rgba(224,82,75,.1);border:1px solid rgba(224,82,75,.34);border-radius:12px;
+  padding:11px 13px;font-size:13px;color:#F2A8A3;line-height:1.5;margin-bottom:11px}
+.timer{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:45;
+  background:var(--gold);color:#1A1206;border-radius:13px;padding:11px 15px;display:none;
+  align-items:center;justify-content:space-between;box-shadow:0 8px 26px rgba(0,0,0,.5)}
+.timer b{font-family:var(--mono);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.timer .lab{font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;opacity:.72}
+.timer button{font-size:12px;font-weight:750;color:#1A1206;border:1.5px solid rgba(26,18,6,.35);
+  border-radius:9px;padding:6px 11px}
+table.plan{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+table.plan th,table.plan td{border:1px solid var(--line);padding:6px 5px;font-size:12px;text-align:center}
+table.plan th{background:var(--surf2);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+table.plan td.ex{text-align:left;font-size:12px;font-weight:600;min-width:150px;
+  position:sticky;left:0;background:var(--surf);z-index:1}
+table.plan td{font-family:var(--mono)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+.hist{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px}
+.hist .hv{font-family:var(--mono);font-weight:650;font-variant-numeric:tabular-nums}
+select.sel{width:100%;background:var(--surf2);border:1px solid var(--line);border-radius:11px;
+  padding:12px;font-size:15px;color:var(--tx);outline:none}
+textarea{width:100%;background:var(--surf2);border:1px solid var(--line);border-radius:11px;
+  padding:11px;font-family:var(--mono);font-size:12px;color:var(--tx);min-height:110px;outline:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom));
+  background:var(--tx);color:var(--bg);padding:10px 17px;border-radius:11px;font-size:13.5px;
+  font-weight:650;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+hr.sep{border:none;border-top:1px solid var(--line);margin:19px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="hd" id="hd"></div>
+<div id="screen"></div>
+<div class="timer" id="timer">
+  <div><div class="lab">Rest</div><b id="tval">0:00</b></div>
+  <div style="display:flex;gap:7px">
+    <button onclick="addRest(30)">+30s</button>
+    <button onclick="stopRest()">Done</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="nav" id="nav"></div>
+
+<script>
+"use strict";
+var D = {"program":{"p1":{"push":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Bench Press","s":4,"mn":5,"mx":8,"rest":180,"inc":5,"cue":"SAFETIES AT CHEST HEIGHT. Training alone - never skip this.","k":"lift"},{"n":"Barbell Overhead Press","s":3,"mn":6,"mx":10,"rest":150,"inc":5,"cue":"Safeties at chin height. Glutes tight, ribs down.","k":"lift"},{"n":"Dumbbell Incline Bench Press","s":3,"mn":8,"mx":12,"rest":120,"inc":5,"cue":"Bench 30-45 deg. Kick the bells up one at a time.","k":"lift"},{"n":"Dip","s":3,"mn":6,"mx":12,"rest":120,"inc":5,"cue":"Lean forward for chest. Bench dips if bodyweight is too much for now.","k":"lift"},{"n":"Cable Chest Fly","s":3,"mn":12,"mx":15,"rest":90,"inc":5,"cue":"Pulleys at chest height, split stance. Soft elbows.","k":"lift"},{"n":"Dumbbell Lateral Raise","s":4,"mn":12,"mx":20,"rest":60,"inc":5,"cue":"Lead with the elbow. Light. This is the one everyone loads too heavy.","k":"lift"},{"n":"Cable Triceps Pushdown (Rope)","s":3,"mn":10,"mx":15,"rest":75,"inc":5,"cue":"Elbows pinned. Spread the rope at the bottom.","k":"lift"},{"n":"Incline Treadmill Walk (Zone 2)","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"30 min, 10-15% incline, 2.8-3.4 mph. Log MINUTES in the weight cell. HR 114-133.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}],"pull":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Row","s":4,"mn":6,"mx":10,"rest":180,"inc":5,"cue":"Torso ~45 deg. Pull to the belly button. No hip jerk.","k":"lift"},{"n":"Pull-Up","s":4,"mn":5,"mx":10,"rest":150,"inc":5,"cue":"Log added weight, or 0 for bodyweight. Band-assisted counts - note it.","k":"lift"},{"n":"Cable Lat Pulldown (Wide)","s":3,"mn":10,"mx":14,"rest":120,"inc":5,"cue":"Kneel facing the trainer. Pull to the collarbone.","k":"lift"},{"n":"Cable Seated Row","s":3,"mn":10,"mx":14,"rest":120,"inc":5,"cue":"Chest tall, pull to the navel, let the blades travel.","k":"lift"},{"n":"Dumbbell Rear Delt Fly","s":3,"mn":15,"mx":20,"rest":60,"inc":5,"cue":"Chest on a 30 deg incline. Spread the wings, don't row.","k":"lift"},{"n":"Barbell Curl","s":3,"mn":8,"mx":12,"rest":90,"inc":5,"cue":"Elbows at the ribs. No swinging.","k":"lift"},{"n":"Dumbbell Hammer Curl","s":3,"mn":10,"mx":15,"rest":75,"inc":5,"cue":"Neutral grip. Builds the thickness barbell curls miss.","k":"lift"},{"n":"Rower Intervals 500m","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 rounds, 90 sec rest. Log TOTAL METERS in the weight cell. Skip until month two.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}],"legs":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Back Squat","s":4,"mn":5,"mx":8,"rest":210,"inc":10,"cue":"SAFETIES JUST BELOW YOUR BOTTOM POSITION. Test them with an empty bar first.","k":"lift"},{"n":"Barbell Romanian Deadlift","s":3,"mn":8,"mx":12,"rest":180,"inc":10,"cue":"Soft knees, hips back. Stop when the hamstrings run out of range.","k":"lift"},{"n":"Dumbbell Bulgarian Split Squat","s":3,"mn":8,"mx":12,"rest":120,"inc":5,"cue":"Rear foot on the bench. Log the weight of ONE bell.","k":"lift"},{"n":"Barbell Hip Thrust","s":3,"mn":8,"mx":12,"rest":120,"inc":10,"cue":"Shoulder blades on the bench, chin tucked. Pad the bar.","k":"lift"},{"n":"Cable Pull-Through","s":3,"mn":12,"mx":15,"rest":90,"inc":5,"cue":"Face away from a low pulley, rope between the legs. Pure hinge.","k":"lift"},{"n":"Dumbbell Standing Calf Raise","s":4,"mn":12,"mx":20,"rest":60,"inc":5,"cue":"Toes on a plate. Pause at the top, full stretch at the bottom.","k":"lift"},{"n":"Hanging Knee Raise","s":3,"mn":8,"mx":15,"rest":60,"inc":5,"cue":"No swinging. Curl the pelvis, don't just lift the legs.","k":"lift"},{"n":"Incline Treadmill Walk (Zone 2)","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"20-30 min after legs, keep it easy. Log MINUTES.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}]},"p2":{"push":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Incline Bench Press","s":4,"mn":5,"mx":8,"rest":180,"inc":5,"cue":"SAFETIES SET. Bench 30-45 deg. Bar to the upper chest.","k":"lift"},{"n":"Barbell Push Press","s":3,"mn":4,"mx":6,"rest":180,"inc":5,"cue":"Short dip, drive with the legs. Heaviest overhead you'll do.","k":"lift"},{"n":"Dumbbell Bench Press","s":3,"mn":8,"mx":12,"rest":120,"inc":5,"cue":"Deeper stretch than the barbell. Log ONE bell's weight.","k":"lift"},{"n":"Weighted Dip","s":3,"mn":6,"mx":10,"rest":120,"inc":5,"cue":"Dip belt (Tier 2 buy). Log added weight, 0 = bodyweight.","k":"lift"},{"n":"Cable Low-to-High Fly","s":3,"mn":12,"mx":15,"rest":90,"inc":5,"cue":"Pulleys at the bottom. Sweep up to collarbone height.","k":"lift"},{"n":"Dumbbell Lateral Raise","s":4,"mn":12,"mx":20,"rest":60,"inc":5,"cue":"Still light. Still the elbow leading.","k":"lift"},{"n":"Dumbbell Skull Crusher","s":3,"mn":10,"mx":14,"rest":75,"inc":5,"cue":"Lower beside the ears. Kinder to the elbows than a barbell.","k":"lift"},{"n":"Incline Treadmill Walk (Zone 2)","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"30-45 min, 10-15% incline. Log MINUTES.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}],"pull":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Deadlift","s":3,"mn":3,"mx":5,"rest":240,"inc":10,"cue":"Bar over midfoot. Brace hard. Reset each rep - no touch-and-go when alone.","k":"lift"},{"n":"Weighted Pull-Up","s":4,"mn":5,"mx":8,"rest":150,"inc":5,"cue":"Log added weight, 0 = bodyweight. Dead hang each rep.","k":"lift"},{"n":"Dumbbell Chest-Supported Row","s":3,"mn":8,"mx":12,"rest":120,"inc":5,"cue":"Chest on a 30-45 deg incline. Zero lower back involvement.","k":"lift"},{"n":"Cable Straight-Arm Pulldown","s":3,"mn":12,"mx":15,"rest":90,"inc":5,"cue":"Arms locked straight. Pure lat, no biceps.","k":"lift"},{"n":"Cable Face Pull","s":3,"mn":15,"mx":20,"rest":60,"inc":5,"cue":"Rope at eye height, pull to the forehead, thumbs back.","k":"lift"},{"n":"Dumbbell Incline Curl","s":3,"mn":8,"mx":12,"rest":90,"inc":5,"cue":"Bench 45-60 deg, arms hang behind. Best long-head stretch.","k":"lift"},{"n":"Cable Rope Hammer Curl","s":3,"mn":12,"mx":15,"rest":60,"inc":5,"cue":"Pull the rope ends apart at the top.","k":"lift"},{"n":"Rower Intervals 500m","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 rounds, 90 sec rest. Log TOTAL METERS.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}],"legs":[{"n":"Warm-Up (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5 min dynamic warm-up for this day type. Mark it done, no weight to log.","k":"warmup"},{"n":"Barbell Front Squat","s":4,"mn":5,"mx":8,"rest":210,"inc":10,"cue":"SAFETIES SET. Elbows high. More upright than a back squat.","k":"lift"},{"n":"Barbell Good Morning","s":3,"mn":8,"mx":12,"rest":180,"inc":10,"cue":"START VERY LIGHT - empty bar first week. Hinge, don't squat.","k":"lift"},{"n":"Dumbbell Reverse Lunge","s":3,"mn":8,"mx":12,"rest":120,"inc":5,"cue":"Step back, not forward. Log ONE bell. Reps per leg.","k":"lift"},{"n":"Barbell Hip Thrust","s":3,"mn":8,"mx":12,"rest":120,"inc":10,"cue":"Same as Program 1. Chin tucked, ribs down.","k":"lift"},{"n":"Dumbbell Single-Leg Romanian Deadlift","s":3,"mn":8,"mx":12,"rest":90,"inc":5,"cue":"Hips stay square. Balance is part of the exercise.","k":"lift"},{"n":"Dumbbell Seated Calf Raise","s":4,"mn":12,"mx":20,"rest":60,"inc":5,"cue":"Bells on the knees. Hits the soleus the standing version misses.","k":"lift"},{"n":"Cable Woodchop (High to Low)","s":3,"mn":10,"mx":15,"rest":60,"inc":5,"cue":"Pivot the back foot. Direct golf swing carryover. Reps per side.","k":"lift"},{"n":"Incline Treadmill Walk (Zone 2)","s":1,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"20-30 min easy. Log MINUTES.","k":"cardio"},{"n":"Cool-Down Stretch (see Mobility tab)","s":null,"mn":null,"mx":null,"rest":0,"inc":0,"cue":"5-6 min static stretching. This is where flexibility is actually built.","k":"cooldown"}]}},"lists":{"push":["Barbell Bench Press","Barbell Incline Bench Press","Barbell Decline Bench Press","Barbell Close-Grip Bench Press","Barbell Floor Press","Barbell Spoto Press","Barbell Pin Press","Barbell Overhead Press","Barbell Seated Overhead Press","Barbell Push Press","Barbell Z Press","Barbell Upright Row","Barbell Skull Crusher","Barbell JM Press","Barbell Landmine Press","Landmine Half-Kneeling Press","Dumbbell Bench Press","Dumbbell Incline Bench Press","Dumbbell Decline Bench Press","Dumbbell Floor Press","Dumbbell Crush Press","Dumbbell Chest Fly","Dumbbell Incline Chest Fly","Dumbbell Pullover","Dumbbell Shoulder Press","Dumbbell Seated Shoulder Press","Dumbbell Arnold Press","Dumbbell Lateral Raise","Dumbbell Leaning Lateral Raise","Dumbbell Front Raise","Dumbbell Y-Raise (Incline)","Dumbbell Skull Crusher","Dumbbell Tate Press","Dumbbell Overhead Triceps Extension","Dumbbell Single-Arm Overhead Triceps Extension","Dumbbell Triceps Kickback","Cable Chest Fly","Cable Low-to-High Fly","Cable High-to-Low Fly","Cable Chest Press","Cable Single-Arm Chest Press","Cable Lateral Raise","Cable Front Raise","Cable Triceps Pushdown (Rope)","Cable Triceps Pushdown (Straight Bar)","Cable Overhead Triceps Extension (Rope)","Cable Single-Arm Triceps Pushdown","Cable Overhead Press (Kneeling)","Dip","Weighted Dip","Bench Dip","Push-Up","Incline Push-Up","Decline Push-Up","Diamond Push-Up","Pike Push-Up","Plank","Weighted Plank","Side Plank","RKC Plank","Hanging Knee Raise","Hanging Leg Raise","Cable Crunch (Kneeling)","Cable Woodchop (High to Low)","Cable Woodchop (Low to High)","Cable Pallof Press","Cable Anti-Rotation Hold","Dumbbell Side Bend","Dumbbell Russian Twist","Dumbbell Overhead Carry","Dead Bug","Bird Dog","Hollow Body Hold","Reverse Crunch","V-Up","Barbell Landmine Rotation","Incline Treadmill Walk (Zone 2)","Incline Treadmill Walk (Steep)","Treadmill Walk (Flat, Recovery)","Treadmill Intervals (Walk/Jog)","Rower Steady State (Zone 2)","Rower Intervals 250m","Rower Intervals 500m","Rower Intervals 1000m","Rower 2000m Time Trial","Rower Pyramid","Weighted Vest Walk","Dumbbell Farmer Carry Finisher","Dumbbell Swing","Dumbbell Thruster Complex","Barbell Complex","Treadmill Incline Intervals","Outdoor Walk (Steps)","Dumbbell Snatch Intervals","Treadmill Warm-Up Walk (5 min)","Rower Warm-Up (3 min)","Empty Bar Warm-Up Set","Ramp-Up Set (50%)","Ramp-Up Set (70%)","Ramp-Up Set (85%)","Cable External Rotation","Cable Face Pull (Warm-Up)","Bodyweight Squat Warm-Up","Dead Hang (Warm-Up)","Cat-Cow","Open Book","Wall Slide","Scap Push-Up","Arm Circles","Thread the Needle","Prone Y-T-W","Scap Pull-Up (Mobility)","Dead Hang (Mobility)","90/90 Hip Switch","Ankle Knee-to-Wall","Leg Swings (Front/Back)","Leg Swings (Side)","Squat to Stand","Bodyweight Squat (Mobility)","World's Greatest Stretch","Hip Airplane","Adductor Rock Back","Rack Pec Stretch","Half-Kneeling Hip Flexor Stretch","Supine Hamstring Stretch","Lat Stretch on Bench","Elevated Hamstring Stretch","Supine Spinal Twist","Couch Stretch","90/90 Hip Hold","Standing Toe Touch","Rack Chest Stretch (Low)","Child's Pose","Pigeon Stretch","Seated Forward Fold","Standing Quad Stretch","Calf Stretch on Rack","Cross-Body Shoulder Stretch","Triceps Overhead Stretch","Butterfly Stretch","Figure-4 Glute Stretch","Seated Thoracic Rotation (Dowel)","Half-Kneeling T-Spine Rotation","90/90 Hip Internal Rotation Lift-Off","Seated Hip Internal Rotation Stretch","Wall Angel","Golf Posture Rotation Drill","Standing Trunk Rotation (Dowel)","Side-Lying Windmill"],"pull":["Barbell Row","Barbell Pendlay Row","Barbell Deadlift","Barbell Rack Pull","Barbell Deficit Deadlift","Barbell Snatch-Grip Deadlift","Barbell Shrug","Barbell Curl","Barbell Preacher Curl","Barbell Reverse Curl","Barbell Drag Curl","EZ Bar Curl","EZ Bar Preacher Curl","EZ Bar Reverse Curl","Landmine Row (Meadows)","T-Bar Row (Landmine)","Chest-Supported Barbell Row","Dumbbell Row (One Arm)","Dumbbell Chest-Supported Row","Dumbbell Incline Row","Dumbbell Seal Row","Dumbbell Shrug","Dumbbell Rear Delt Fly","Dumbbell Bent-Over Rear Delt Fly","Dumbbell Prone Y-Raise","Dumbbell Prone T-Raise","Dumbbell Curl","Dumbbell Incline Curl","Dumbbell Hammer Curl","Dumbbell Concentration Curl","Dumbbell Preacher Curl","Dumbbell Zottman Curl","Dumbbell Spider Curl","Dumbbell Cross-Body Hammer Curl","Dumbbell Reverse Curl","Dumbbell Wrist Curl","Dumbbell Reverse Wrist Curl","Dumbbell Pullover (Lat Bias)","Dumbbell High Pull","Cable Lat Pulldown (Wide)","Cable Lat Pulldown (Neutral)","Cable Lat Pulldown (Underhand)","Cable Single-Arm Lat Pulldown","Cable Straight-Arm Pulldown","Cable Seated Row","Cable Single-Arm Row","Cable Wide-Grip Row","Cable Face Pull","Cable Rear Delt Fly","Cable Shrug","Cable Curl (Straight Bar)","Cable Curl (EZ Bar)","Cable Rope Hammer Curl","Cable Single-Arm Curl","Cable Bayesian Curl","Cable Reverse Curl","Cable High Row","Pull-Up","Chin-Up","Neutral-Grip Pull-Up","Weighted Pull-Up","Band-Assisted Pull-Up","Inverted Row (Barbell in Rack)","Dead Hang","Scap Pull-Up","Plate-Loaded Lat Pulldown","Plate-Loaded Low Row","Plank","Weighted Plank","Side Plank","RKC Plank","Hanging Knee Raise","Hanging Leg Raise","Cable Crunch (Kneeling)","Cable Woodchop (High to Low)","Cable Woodchop (Low to High)","Cable Pallof Press","Cable Anti-Rotation Hold","Dumbbell Side Bend","Dumbbell Russian Twist","Dumbbell Overhead Carry","Dead Bug","Bird Dog","Hollow Body Hold","Reverse Crunch","V-Up","Barbell Landmine Rotation","Incline Treadmill Walk (Zone 2)","Incline Treadmill Walk (Steep)","Treadmill Walk (Flat, Recovery)","Treadmill Intervals (Walk/Jog)","Rower Steady State (Zone 2)","Rower Intervals 250m","Rower Intervals 500m","Rower Intervals 1000m","Rower 2000m Time Trial","Rower Pyramid","Weighted Vest Walk","Dumbbell Farmer Carry Finisher","Dumbbell Swing","Dumbbell Thruster Complex","Barbell Complex","Treadmill Incline Intervals","Outdoor Walk (Steps)","Dumbbell Snatch Intervals","Treadmill Warm-Up Walk (5 min)","Rower Warm-Up (3 min)","Empty Bar Warm-Up Set","Ramp-Up Set (50%)","Ramp-Up Set (70%)","Ramp-Up Set (85%)","Cable External Rotation","Cable Face Pull (Warm-Up)","Bodyweight Squat Warm-Up","Dead Hang (Warm-Up)","Cat-Cow","Open Book","Wall Slide","Scap Push-Up","Arm Circles","Thread the Needle","Prone Y-T-W","Scap Pull-Up (Mobility)","Dead Hang (Mobility)","90/90 Hip Switch","Ankle Knee-to-Wall","Leg Swings (Front/Back)","Leg Swings (Side)","Squat to Stand","Bodyweight Squat (Mobility)","World's Greatest Stretch","Hip Airplane","Adductor Rock Back","Rack Pec Stretch","Half-Kneeling Hip Flexor Stretch","Supine Hamstring Stretch","Lat Stretch on Bench","Elevated Hamstring Stretch","Supine Spinal Twist","Couch Stretch","90/90 Hip Hold","Standing Toe Touch","Rack Chest Stretch (Low)","Child's Pose","Pigeon Stretch","Seated Forward Fold","Standing Quad Stretch","Calf Stretch on Rack","Cross-Body Shoulder Stretch","Triceps Overhead Stretch","Butterfly Stretch","Figure-4 Glute Stretch","Seated Thoracic Rotation (Dowel)","Half-Kneeling T-Spine Rotation","90/90 Hip Internal Rotation Lift-Off","Seated Hip Internal Rotation Stretch","Wall Angel","Golf Posture Rotation Drill","Standing Trunk Rotation (Dowel)","Side-Lying Windmill"],"legs":["Barbell Back Squat","Barbell Front Squat","Barbell High-Bar Squat","Barbell Low-Bar Squat","Barbell Pause Squat","Barbell Box Squat","Barbell Pin Squat","Barbell Romanian Deadlift","Barbell Stiff-Leg Deadlift","Barbell Good Morning","Barbell Hip Thrust","Barbell Glute Bridge","Barbell Walking Lunge","Barbell Reverse Lunge","Barbell Split Squat","Barbell Bulgarian Split Squat","Barbell Step-Up","Barbell Calf Raise","Barbell Zercher Squat","Barbell Sumo Deadlift","Landmine Squat","Landmine Reverse Lunge","Dumbbell Goblet Squat","Dumbbell Front Squat","Dumbbell Romanian Deadlift","Dumbbell Single-Leg Romanian Deadlift","Dumbbell Bulgarian Split Squat","Dumbbell Reverse Lunge","Dumbbell Walking Lunge","Dumbbell Lateral Lunge","Dumbbell Curtsy Lunge","Dumbbell Step-Up","Dumbbell Deficit Reverse Lunge","Dumbbell Sumo Squat","Dumbbell Standing Calf Raise","Dumbbell Seated Calf Raise","Dumbbell Single-Leg Calf Raise","Dumbbell Suitcase Carry","Dumbbell Farmer Carry","Cable Pull-Through","Cable Romanian Deadlift","Cable Leg Curl (Ankle Cuff)","Cable Hip Abduction (Ankle Cuff)","Cable Hip Adduction (Ankle Cuff)","Cable Glute Kickback (Ankle Cuff)","Cable Squat","Cable Split Squat","Bodyweight Squat","Nordic Ham Curl (Assisted)","Reverse Hyperextension (Bench)","Back Extension (45 deg)","Sissy Squat","Wall Sit","Single-Leg Glute Bridge","Plate-Loaded Leg Extension","Plate-Loaded Leg Curl","Plank","Weighted Plank","Side Plank","RKC Plank","Hanging Knee Raise","Hanging Leg Raise","Cable Crunch (Kneeling)","Cable Woodchop (High to Low)","Cable Woodchop (Low to High)","Cable Pallof Press","Cable Anti-Rotation Hold","Dumbbell Side Bend","Dumbbell Russian Twist","Dumbbell Overhead Carry","Dead Bug","Bird Dog","Hollow Body Hold","Reverse Crunch","V-Up","Barbell Landmine Rotation","Incline Treadmill Walk (Zone 2)","Incline Treadmill Walk (Steep)","Treadmill Walk (Flat, Recovery)","Treadmill Intervals (Walk/Jog)","Rower Steady State (Zone 2)","Rower Intervals 250m","Rower Intervals 500m","Rower Intervals 1000m","Rower 2000m Time Trial","Rower Pyramid","Weighted Vest Walk","Dumbbell Farmer Carry Finisher","Dumbbell Swing","Dumbbell Thruster Complex","Barbell Complex","Treadmill Incline Intervals","Outdoor Walk (Steps)","Dumbbell Snatch Intervals","Treadmill Warm-Up Walk (5 min)","Rower Warm-Up (3 min)","Empty Bar Warm-Up Set","Ramp-Up Set (50%)","Ramp-Up Set (70%)","Ramp-Up Set (85%)","Cable External Rotation","Cable Face Pull (Warm-Up)","Bodyweight Squat Warm-Up","Dead Hang (Warm-Up)","Cat-Cow","Open Book","Wall Slide","Scap Push-Up","Arm Circles","Thread the Needle","Prone Y-T-W","Scap Pull-Up (Mobility)","Dead Hang (Mobility)","90/90 Hip Switch","Ankle Knee-to-Wall","Leg Swings (Front/Back)","Leg Swings (Side)","Squat to Stand","Bodyweight Squat (Mobility)","World's Greatest Stretch","Hip Airplane","Adductor Rock Back","Rack Pec Stretch","Half-Kneeling Hip Flexor Stretch","Supine Hamstring Stretch","Lat Stretch on Bench","Elevated Hamstring Stretch","Supine Spinal Twist","Couch Stretch","90/90 Hip Hold","Standing Toe Touch","Rack Chest Stretch (Low)","Child's Pose","Pigeon Stretch","Seated Forward Fold","Standing Quad Stretch","Calf Stretch on Rack","Cross-Body Shoulder Stretch","Triceps Overhead Stretch","Butterfly Stretch","Figure-4 Glute Stretch","Seated Thoracic Rotation (Dowel)","Half-Kneeling T-Spine Rotation","90/90 Hip Internal Rotation Lift-Off","Seated Hip Internal Rotation Stretch","Wall Angel","Golf Posture Rotation Drill","Standing Trunk Rotation (Dowel)","Side-Lying Windmill"]},"lib":[["Barbell Bench Press","Push","Chest","Barbell + Rack + Bench","Horizontal Press","Safeties at chest height. Bench flat, feet planted, shoulder blades pinned."],["Barbell Incline Bench Press","Push","Upper Chest","Barbell + Rack + Bench","Incline Press","Bench 30-45 deg. Bar to upper chest, elbows ~45 deg from torso."],["Barbell Decline Bench Press","Push","Lower Chest","Barbell + Rack + Bench","Decline Press","Bench declined or feet elevated. Shorter range, heavier loads."],["Barbell Close-Grip Bench Press","Push","Triceps","Barbell + Rack + Bench","Horizontal Press","Hands shoulder-width. Elbows tucked. Safeties set."],["Barbell Floor Press","Push","Triceps / Chest","Barbell + Rack","Horizontal Press","Lie on floor inside rack. Triceps touch, pause, press."],["Barbell Spoto Press","Push","Chest","Barbell + Rack + Bench","Horizontal Press","Pause 1 inch off chest. Builds control out of the hole."],["Barbell Pin Press","Push","Triceps / Chest","Barbell + Rack + Bench","Horizontal Press","Bar starts dead on safeties. Overload the lockout."],["Barbell Overhead Press","Push","Shoulders","Barbell + Rack","Vertical Press","Safeties at chin height. Squeeze glutes, ribs down, press to overhead lockout."],["Barbell Seated Overhead Press","Push","Shoulders","Barbell + Rack + Bench","Vertical Press","Bench at 85 deg inside rack. Removes leg drive."],["Barbell Push Press","Push","Shoulders","Barbell + Rack","Vertical Press","Short dip, drive with legs, finish with arms. Heaviest overhead variation."],["Barbell Z Press","Push","Shoulders / Core","Barbell + Rack","Vertical Press","Seated on floor, legs straight. Brutal on the core, zero leg drive."],["Barbell Upright Row","Push","Side Delts / Traps","Barbell","Vertical Pull","Wide grip, pull to sternum. Stop if shoulders pinch."],["Barbell Skull Crusher","Push","Triceps","Barbell + Bench","Elbow Extension","Lower to forehead or just behind. Elbows stay pointed up."],["Barbell JM Press","Push","Triceps","Barbell + Rack + Bench","Elbow Extension","Hybrid of close-grip and skull crusher. Bar tracks to the throat."],["Barbell Landmine Press","Push","Shoulders","Barbell + Landmine","Vertical Press","Standing, one arm. Shoulder-friendly pressing angle."],["Landmine Half-Kneeling Press","Push","Shoulders / Core","Barbell + Landmine","Vertical Press","Half-kneeling kills the hip drive. Great anti-lean core work."],["Dumbbell Bench Press","Push","Chest","Dumbbells + Bench","Horizontal Press","Kick the bells up one at a time. Deeper stretch than barbell."],["Dumbbell Incline Bench Press","Push","Upper Chest","Dumbbells + Bench","Incline Press","Bench 30-45 deg. Bells travel toward each other at the top."],["Dumbbell Decline Bench Press","Push","Lower Chest","Dumbbells + Bench","Decline Press","Decline bench. Watch getting the bells into position alone."],["Dumbbell Floor Press","Push","Triceps / Chest","Dumbbells","Horizontal Press","Safest heavy press when training alone. Triceps touch the floor."],["Dumbbell Crush Press","Push","Inner Chest","Dumbbells + Bench","Horizontal Press","Squeeze the bells together hard the whole set."],["Dumbbell Chest Fly","Push","Chest","Dumbbells + Bench","Horizontal Fly","Soft elbows, wide arc. Stretch, don't press."],["Dumbbell Incline Chest Fly","Push","Upper Chest","Dumbbells + Bench","Incline Fly","Bench 30 deg. Control the stretch, no bouncing at the bottom."],["Dumbbell Pullover","Push","Chest / Lats","Dumbbells + Bench","Pullover","One bell, both hands. Deep stretch overhead, ribs stay down."],["Dumbbell Shoulder Press","Push","Shoulders","Dumbbells","Vertical Press","Standing or seated. Bells start at ear height."],["Dumbbell Seated Shoulder Press","Push","Shoulders","Dumbbells + Bench","Vertical Press","Bench at 85 deg with back support. Strictest overhead option."],["Dumbbell Arnold Press","Push","Shoulders","Dumbbells + Bench","Vertical Press","Start palms-in, rotate out as you press. Hits all three delt heads."],["Dumbbell Lateral Raise","Push","Side Delts","Dumbbells","Lateral Raise","Lead with the elbow. Stop at shoulder height. Light and high-rep."],["Dumbbell Leaning Lateral Raise","Push","Side Delts","Dumbbells + Rack","Lateral Raise","Hold the upright and lean away. Longer tension curve."],["Dumbbell Front Raise","Push","Front Delts","Dumbbells","Front Raise","One arm at a time or both. Don't swing from the hips."],["Dumbbell Y-Raise (Incline)","Push","Rear / Side Delts","Dumbbells + Bench","Raise","Chest on 30 deg incline. Raise into a Y overhead."],["Dumbbell Skull Crusher","Push","Triceps","Dumbbells + Bench","Elbow Extension","Lower beside the ears. Easier on the elbows than a barbell."],["Dumbbell Tate Press","Push","Triceps","Dumbbells + Bench","Elbow Extension","Bells lower to the chest with elbows flared. Odd but effective."],["Dumbbell Overhead Triceps Extension","Push","Triceps (Long Head)","Dumbbells + Bench","Elbow Extension","One bell, both hands, behind the head. Elbows stay narrow."],["Dumbbell Single-Arm Overhead Triceps Extension","Push","Triceps (Long Head)","Dumbbells","Elbow Extension","One arm, free hand braces the elbow."],["Dumbbell Triceps Kickback","Push","Triceps","Dumbbells + Bench","Elbow Extension","Upper arm locked parallel to the floor. Squeeze at lockout."],["Cable Chest Fly","Push","Chest","Functional Trainer","Horizontal Fly","Pulleys at chest height. Step forward into a split stance."],["Cable Low-to-High Fly","Push","Upper Chest","Functional Trainer","Fly","Pulleys at the bottom. Sweep up and together at collarbone height."],["Cable High-to-Low Fly","Push","Lower Chest","Functional Trainer","Fly","Pulleys at the top. Finish with hands together at your hips."],["Cable Chest Press","Push","Chest","Functional Trainer","Horizontal Press","Pulleys at chest height, split stance. Constant tension."],["Cable Single-Arm Chest Press","Push","Chest / Core","Functional Trainer","Horizontal Press","One arm. Resist the rotation the cable creates."],["Cable Lateral Raise","Push","Side Delts","Functional Trainer","Lateral Raise","Pulley at the bottom, cable crosses the body. Tension at the bottom."],["Cable Front Raise","Push","Front Delts","Functional Trainer","Front Raise","Low pulley, straight bar or D-handle."],["Cable Triceps Pushdown (Rope)","Push","Triceps","Functional Trainer","Elbow Extension","High pulley, rope. Spread the rope at the bottom."],["Cable Triceps Pushdown (Straight Bar)","Push","Triceps","Functional Trainer","Elbow Extension","High pulley, straight bar. Elbows pinned to the ribs."],["Cable Overhead Triceps Extension (Rope)","Push","Triceps (Long Head)","Functional Trainer","Elbow Extension","Face away from a low pulley, rope overhead. Best long-head stretch."],["Cable Single-Arm Triceps Pushdown","Push","Triceps","Functional Trainer","Elbow Extension","D-handle, underhand or neutral. Fixes side-to-side gaps."],["Cable Overhead Press (Kneeling)","Push","Shoulders / Core","Functional Trainer","Vertical Press","Half-kneeling, low pulley, straight bar. Core does real work."],["Dip","Push","Chest / Triceps","Rack Dip Attachment","Vertical Press","Lean forward for chest, stay upright for triceps. Add a belt when 12+ reps get easy."],["Weighted Dip","Push","Chest / Triceps","Rack Dip Attachment + Dip Belt","Vertical Press","Dip belt required (Tier 2 buy). Control the bottom, no bouncing."],["Bench Dip","Push","Triceps","Bench","Vertical Press","Hands on the bench behind you. Regression when dips are too hard."],["Push-Up","Push","Chest","Bodyweight","Horizontal Press","Body in one line. Elbows ~45 deg, not flared to 90."],["Incline Push-Up","Push","Chest","Bench","Horizontal Press","Hands on the bench. Easiest push-up variation."],["Decline Push-Up","Push","Upper Chest","Bench","Horizontal Press","Feet on the bench. Shifts load to the upper chest and shoulders."],["Diamond Push-Up","Push","Triceps","Bodyweight","Horizontal Press","Hands together under the sternum."],["Pike Push-Up","Push","Shoulders","Bodyweight","Vertical Press","Hips high, head tracks between the hands. Bodyweight overhead press."],["Barbell Row","Pull","Lats / Mid Back","Barbell","Horizontal Pull","Torso ~45 deg. Pull to the belly button, no jerking with the hips."],["Barbell Pendlay Row","Pull","Mid Back","Barbell","Horizontal Pull","Torso parallel, bar resets on the floor each rep. Explosive."],["Barbell Deadlift","Pull","Posterior Chain","Barbell","Hip Hinge","Bar over midfoot. Brace hard, push the floor away. Heaviest lift you own."],["Barbell Rack Pull","Pull","Upper Back / Traps","Barbell + Rack","Hip Hinge","Bar on safeties at or just below the knee. Overload the top half."],["Barbell Deficit Deadlift","Pull","Posterior Chain","Barbell + Platform","Hip Hinge","Stand on a mat or plate. Longer range, lighter load."],["Barbell Snatch-Grip Deadlift","Pull","Upper Back","Barbell","Hip Hinge","Very wide grip. Punishes the upper back, builds pulling posture."],["Barbell Shrug","Pull","Traps","Barbell","Shrug","Straight up, no rolling. Pause a beat at the top."],["Barbell Curl","Pull","Biceps","Barbell","Elbow Flexion","Elbows fixed at the ribs. No hip swing."],["Barbell Preacher Curl","Pull","Biceps","Barbell + Bench Preacher Pad","Elbow Flexion","Preacher pad on the adjustable bench. Full stretch at the bottom."],["Barbell Reverse Curl","Pull","Brachialis / Forearms","Barbell","Elbow Flexion","Overhand grip. Builds forearm and elbow thickness."],["Barbell Drag Curl","Pull","Biceps","Barbell","Elbow Flexion","Drag the bar up the torso, elbows travel back."],["EZ Bar Curl","Pull","Biceps","Functional Trainer EZ Bar","Elbow Flexion","Angled grip, easier on the wrists than a straight bar."],["EZ Bar Preacher Curl","Pull","Biceps","EZ Bar + Preacher Pad","Elbow Flexion","Preacher pad on the bench. Strictest curl you can do."],["EZ Bar Reverse Curl","Pull","Brachialis / Forearms","EZ Bar","Elbow Flexion","Overhand on the angled grips. Wrist-friendly."],["Landmine Row (Meadows)","Pull","Lats","Barbell + Landmine","Horizontal Pull","One arm, staggered stance, side-on to the bar."],["T-Bar Row (Landmine)","Pull","Mid Back","Barbell + Landmine","Horizontal Pull","Straddle the bar, V-handle under it. Heavy mid-back work."],["Chest-Supported Barbell Row","Pull","Mid Back","Barbell + Bench","Horizontal Pull","Chest on a high incline. Removes the lower back entirely."],["Dumbbell Row (One Arm)","Pull","Lats","Dumbbells + Bench","Horizontal Pull","Hand and knee on the bench. Pull to the hip, not the armpit."],["Dumbbell Chest-Supported Row","Pull","Mid Back","Dumbbells + Bench","Horizontal Pull","Chest on a 30-45 deg incline. Strict, back-friendly."],["Dumbbell Incline Row","Pull","Lats / Rear Delts","Dumbbells + Bench","Horizontal Pull","Chest on incline, pull wide and high for rear delts."],["Dumbbell Seal Row","Pull","Mid Back","Dumbbells + Bench","Horizontal Pull","Face-down on a flat bench raised on blocks. Zero cheating."],["Dumbbell Shrug","Pull","Traps","Dumbbells","Shrug","Bells at the sides. Straight up, pause, control down."],["Dumbbell Rear Delt Fly","Pull","Rear Delts","Dumbbells + Bench","Reverse Fly","Chest on a 30 deg incline. Light weight, think 'spread the wings'."],["Dumbbell Bent-Over Rear Delt Fly","Pull","Rear Delts","Dumbbells","Reverse Fly","Hinge to parallel, sweep wide. Don't turn it into a row."],["Dumbbell Prone Y-Raise","Pull","Lower Traps","Dumbbells + Bench","Raise","Face-down on an incline. Raise into a Y. Very light."],["Dumbbell Prone T-Raise","Pull","Mid Traps / Rear Delts","Dumbbells + Bench","Raise","Face-down, arms straight out to the sides."],["Dumbbell Curl","Pull","Biceps","Dumbbells","Elbow Flexion","Supinate as you curl. Squeeze at the top."],["Dumbbell Incline Curl","Pull","Biceps (Long Head)","Dumbbells + Bench","Elbow Flexion","Bench at 45-60 deg, arms hang behind. Best long-head stretch."],["Dumbbell Hammer Curl","Pull","Brachialis / Forearms","Dumbbells","Elbow Flexion","Neutral grip throughout. Builds arm thickness."],["Dumbbell Concentration Curl","Pull","Biceps","Dumbbells + Bench","Elbow Flexion","Seated, elbow braced on the inner thigh."],["Dumbbell Preacher Curl","Pull","Biceps","Dumbbells + Preacher Pad","Elbow Flexion","One arm at a time on the preacher pad."],["Dumbbell Zottman Curl","Pull","Biceps / Forearms","Dumbbells","Elbow Flexion","Curl up supinated, rotate, lower pronated."],["Dumbbell Spider Curl","Pull","Biceps (Short Head)","Dumbbells + Bench","Elbow Flexion","Chest on a high incline, arms hang straight down."],["Dumbbell Cross-Body Hammer Curl","Pull","Brachialis","Dumbbells","Elbow Flexion","Curl across the body toward the opposite shoulder."],["Dumbbell Reverse Curl","Pull","Forearms","Dumbbells","Elbow Flexion","Overhand grip. Go light, it humbles everyone."],["Dumbbell Wrist Curl","Pull","Forearms","Dumbbells + Bench","Wrist Flexion","Forearms on the bench, palms up. Full range at the fingers."],["Dumbbell Reverse Wrist Curl","Pull","Forearms","Dumbbells + Bench","Wrist Extension","Palms down. Prevents elbow tendinopathy."],["Dumbbell Pullover (Lat Bias)","Pull","Lats","Dumbbells + Bench","Pullover","Lie across the bench, hips low. Pull with the lats, not the chest."],["Dumbbell High Pull","Pull","Traps / Rear Delts","Dumbbells","Vertical Pull","Explosive pull to chest height, elbows lead."],["Cable Lat Pulldown (Wide)","Pull","Lats","Functional Trainer + Lat Bar","Vertical Pull","Kneel or sit facing the trainer. Pull to the collarbone."],["Cable Lat Pulldown (Neutral)","Pull","Lats","Functional Trainer + V-Handle","Vertical Pull","Neutral grip. Easiest on the shoulders."],["Cable Lat Pulldown (Underhand)","Pull","Lats / Biceps","Functional Trainer + Straight Bar","Vertical Pull","Supinated grip, pull to the sternum."],["Cable Single-Arm Lat Pulldown","Pull","Lats","Functional Trainer + D-Handle","Vertical Pull","One arm, kneeling. Big stretch at the top."],["Cable Straight-Arm Pulldown","Pull","Lats","Functional Trainer + Straight Bar","Shoulder Extension","Arms locked straight. Pure lat isolation."],["Cable Seated Row","Pull","Mid Back","Functional Trainer + V-Handle","Horizontal Pull","Seated on the floor or a bench. Pull to the navel, chest tall."],["Cable Single-Arm Row","Pull","Lats","Functional Trainer + D-Handle","Horizontal Pull","Split stance, one arm. Let the shoulder blade travel."],["Cable Wide-Grip Row","Pull","Rear Delts / Mid Back","Functional Trainer + Straight Bar","Horizontal Pull","Pull high to the chest with elbows flared."],["Cable Face Pull","Pull","Rear Delts / Rotator Cuff","Functional Trainer + Rope","Horizontal Pull","Rope at eye height. Pull to the forehead, thumbs back."],["Cable Rear Delt Fly","Pull","Rear Delts","Functional Trainer","Reverse Fly","Cross the cables, pull wide and apart at shoulder height."],["Cable Shrug","Pull","Traps","Functional Trainer + Straight Bar","Shrug","Low pulleys. Constant tension top to bottom."],["Cable Curl (Straight Bar)","Pull","Biceps","Functional Trainer + Straight Bar","Elbow Flexion","Low pulleys. Tension never drops."],["Cable Curl (EZ Bar)","Pull","Biceps","Functional Trainer + EZ Bar","Elbow Flexion","Wrist-friendly cable curl."],["Cable Rope Hammer Curl","Pull","Brachialis","Functional Trainer + Rope","Elbow Flexion","Neutral grip on the rope. Pull the ends apart at the top."],["Cable Single-Arm Curl","Pull","Biceps","Functional Trainer + D-Handle","Elbow Flexion","One arm, cable slightly behind you."],["Cable Bayesian Curl","Pull","Biceps (Long Head)","Functional Trainer + D-Handle","Elbow Flexion","Face away from a low pulley, arm behind the torso. Huge stretch."],["Cable Reverse Curl","Pull","Forearms","Functional Trainer + Straight Bar","Elbow Flexion","Overhand on a low pulley."],["Cable High Row","Pull","Upper Back","Functional Trainer + Rope","Horizontal Pull","Pulleys high, pull down and back toward the ribs."],["Pull-Up","Pull","Lats","Rack Pull-Up Bar","Vertical Pull","Overhand, chest to the bar. Dead hang each rep."],["Chin-Up","Pull","Lats / Biceps","Rack Pull-Up Bar","Vertical Pull","Underhand grip. Easier than a pull-up, more biceps."],["Neutral-Grip Pull-Up","Pull","Lats","Rack Pull-Up Bar","Vertical Pull","Palms facing. Kindest grip to the shoulders."],["Weighted Pull-Up","Pull","Lats","Pull-Up Bar + Dip Belt","Vertical Pull","Dip belt required (Tier 2 buy). Add weight once 10 clean reps are easy."],["Band-Assisted Pull-Up","Pull","Lats","Pull-Up Bar + Band","Vertical Pull","Band looped over the bar, foot or knee in it. The on-ramp."],["Inverted Row (Barbell in Rack)","Pull","Mid Back","Barbell + Rack","Horizontal Pull","Bar in the rack at hip height. Body straight, pull the chest to the bar."],["Dead Hang","Pull","Lats / Grip","Rack Pull-Up Bar","Hang","Just hang. Decompresses the spine, builds grip."],["Scap Pull-Up","Pull","Lower Traps","Rack Pull-Up Bar","Scapular","Arms stay straight. Pull the shoulder blades down only."],["Plate-Loaded Lat Pulldown","Pull","Lats","REP Lat Pulldown (planned buy)","Vertical Pull","1:1 pulley, iron plates. Requires the rear base stabilizer."],["Plate-Loaded Low Row","Pull","Mid Back","REP Low Row (planned buy)","Horizontal Pull","Feet on the foot plate, chest tall, pull to the navel."],["Barbell Back Squat","Legs","Quads / Glutes","Barbell + Rack","Squat","SAFETIES SET just below your bottom position. Brace, sit between the hips."],["Barbell Front Squat","Legs","Quads","Barbell + Rack","Squat","Elbows high, bar on the front delts. Safeties set. More upright than back squat."],["Barbell High-Bar Squat","Legs","Quads","Barbell + Rack","Squat","Bar on the traps, torso upright. Safeties set."],["Barbell Low-Bar Squat","Legs","Glutes / Hamstrings","Barbell + Rack","Squat","Bar on the rear delts, more hinge. Safeties set."],["Barbell Pause Squat","Legs","Quads","Barbell + Rack","Squat","2-second pause at the bottom. Kills the bounce."],["Barbell Box Squat","Legs","Glutes / Hamstrings","Barbell + Rack + Bench","Squat","Sit to the bench, stay tight, drive up. Consistent depth."],["Barbell Pin Squat","Legs","Quads","Barbell + Rack","Squat","Bar starts dead on the safeties. Brutal, no stretch reflex."],["Barbell Romanian Deadlift","Legs","Hamstrings / Glutes","Barbell + Rack","Hip Hinge","Soft knees, push the hips back. Stop when the hamstrings run out."],["Barbell Stiff-Leg Deadlift","Legs","Hamstrings","Barbell","Hip Hinge","Near-straight legs, bar from the floor. Lighter than an RDL."],["Barbell Good Morning","Legs","Hamstrings / Lower Back","Barbell + Rack","Hip Hinge","Bar on the back, hinge forward. Start very light."],["Barbell Hip Thrust","Legs","Glutes","Barbell + Bench","Hip Extension","Shoulder blades on the bench, chin tucked. Pad the bar."],["Barbell Glute Bridge","Legs","Glutes","Barbell","Hip Extension","Back flat on the floor. Shorter range than a hip thrust."],["Barbell Walking Lunge","Legs","Quads / Glutes","Barbell + Rack","Lunge","Bar on the back, walk the length of the room. Needs floor space."],["Barbell Reverse Lunge","Legs","Quads / Glutes","Barbell + Rack","Lunge","Step back, not forward. Easier on the knees."],["Barbell Split Squat","Legs","Quads","Barbell + Rack","Lunge","Static split stance. Front shin vertical."],["Barbell Bulgarian Split Squat","Legs","Quads / Glutes","Barbell + Rack + Bench","Lunge","Rear foot on the bench. Advanced balance demand."],["Barbell Step-Up","Legs","Quads / Glutes","Barbell + Bench","Step-Up","Drive through the top foot. Don't push off the back leg."],["Barbell Calf Raise","Legs","Calves","Barbell + Rack","Calf Raise","Bar on the back, toes on a plate. Full stretch at the bottom."],["Barbell Zercher Squat","Legs","Quads / Core","Barbell + Rack","Squat","Bar in the elbow crooks. Use a towel. Very upright."],["Barbell Sumo Deadlift","Legs","Glutes / Quads","Barbell","Hip Hinge","Wide stance, hands inside the knees. Shorter range."],["Landmine Squat","Legs","Quads","Barbell + Landmine","Squat","Bar end at the chest. Great squat teaching tool."],["Landmine Reverse Lunge","Legs","Quads / Glutes","Barbell + Landmine","Lunge","Bar end at the chest, step back."],["Dumbbell Goblet Squat","Legs","Quads","Dumbbells","Squat","One bell at the chest. The safest loaded squat when training alone."],["Dumbbell Front Squat","Legs","Quads","Dumbbells","Squat","Bells on the shoulders. Grip limits the load."],["Dumbbell Romanian Deadlift","Legs","Hamstrings","Dumbbells","Hip Hinge","Bells track down the thighs. Hips back, chest proud."],["Dumbbell Single-Leg Romanian Deadlift","Legs","Hamstrings / Glutes","Dumbbells","Hip Hinge","One leg. Hips stay square, no rotation."],["Dumbbell Bulgarian Split Squat","Legs","Quads / Glutes","Dumbbells + Bench","Lunge","Rear foot on the bench, bells at the sides. The 75s will be plenty."],["Dumbbell Reverse Lunge","Legs","Quads / Glutes","Dumbbells","Lunge","Step back and down. Knee-friendly."],["Dumbbell Walking Lunge","Legs","Quads / Glutes","Dumbbells","Lunge","Walk the room. Watch the floor space in the basement."],["Dumbbell Lateral Lunge","Legs","Adductors / Glutes","Dumbbells","Lunge","Step wide sideways, sit into that hip. Great for golf hips."],["Dumbbell Curtsy Lunge","Legs","Glutes (Medius)","Dumbbells","Lunge","Step back and across. Hits the side glute."],["Dumbbell Step-Up","Legs","Quads / Glutes","Dumbbells + Bench","Step-Up","Bench at knee height. All the drive from the top leg."],["Dumbbell Deficit Reverse Lunge","Legs","Quads / Glutes","Dumbbells + Plate","Lunge","Front foot on a plate. Longer range."],["Dumbbell Sumo Squat","Legs","Adductors / Glutes","Dumbbells","Squat","Wide stance, one bell hanging between the legs."],["Dumbbell Standing Calf Raise","Legs","Calves","Dumbbells + Plate","Calf Raise","Toes on a plate, one or two bells. Pause at the top."],["Dumbbell Seated Calf Raise","Legs","Soleus","Dumbbells + Bench","Calf Raise","Bells on the knees, seated. Hits the deeper calf muscle."],["Dumbbell Single-Leg Calf Raise","Legs","Calves","Dumbbells","Calf Raise","One leg, hold the rack for balance."],["Dumbbell Suitcase Carry","Legs","Core / Grip","Dumbbells","Carry","One bell. Don't let the torso lean."],["Dumbbell Farmer Carry","Legs","Traps / Grip","Dumbbells","Carry","Both bells, walk. Conditioning and grip in one."],["Cable Pull-Through","Legs","Glutes / Hamstrings","Functional Trainer + Rope","Hip Hinge","Face away from a low pulley, rope between the legs. Pure hip hinge."],["Cable Romanian Deadlift","Legs","Hamstrings","Functional Trainer + Straight Bar","Hip Hinge","Low pulleys. Tension stays on at the top."],["Cable Leg Curl (Ankle Cuff)","Legs","Hamstrings","Functional Trainer + Ankle Cuff","Knee Flexion","Ankle cuff required (Tier 1 buy). Face the trainer, curl the heel to the glute."],["Cable Hip Abduction (Ankle Cuff)","Legs","Glute Medius","Functional Trainer + Ankle Cuff","Hip Abduction","Cuff on the outside ankle, leg sweeps away from the machine."],["Cable Hip Adduction (Ankle Cuff)","Legs","Adductors","Functional Trainer + Ankle Cuff","Hip Adduction","Leg sweeps across the body. Golf-relevant."],["Cable Glute Kickback (Ankle Cuff)","Legs","Glutes","Functional Trainer + Ankle Cuff","Hip Extension","Face the trainer, drive the heel back. Squeeze, don't arch."],["Cable Squat","Legs","Quads","Functional Trainer + Straight Bar","Squat","Low pulleys, bar at the shoulders. Light but safe."],["Cable Split Squat","Legs","Quads","Functional Trainer + D-Handles","Lunge","Split stance with cable assistance for balance."],["Bodyweight Squat","Legs","Quads","Bodyweight","Squat","Warm-up or high-rep finisher."],["Nordic Ham Curl (Assisted)","Legs","Hamstrings","Bench / Leg Developer","Knee Flexion","Anchor the ankles. Lower slowly, push off with the hands at the bottom."],["Reverse Hyperextension (Bench)","Legs","Glutes / Lower Back","Bench","Hip Extension","Hips on the end of the bench, legs hang. Light and controlled."],["Back Extension (45 deg)","Legs","Lower Back / Glutes","Bench / Leg Developer","Hip Extension","Hinge at the hips, don't hyperextend the spine at the top."],["Sissy Squat","Legs","Quads (Rectus Femoris)","Bodyweight / Rack","Knee Extension","Hold the rack, knees travel forward, hips stay extended. Go easy."],["Wall Sit","Legs","Quads","Bodyweight","Isometric","90 deg knees, back on the wall. Timed hold."],["Single-Leg Glute Bridge","Legs","Glutes","Bodyweight","Hip Extension","One foot down, other knee to the chest. Hips stay level."],["Plate-Loaded Leg Extension","Legs","Quads","Freak Athlete Leg Developer (planned buy)","Knee Extension","Confirm the Leg Developer fits your bench model before ordering."],["Plate-Loaded Leg Curl","Legs","Hamstrings","Freak Athlete Leg Developer (planned buy)","Knee Flexion","Decline ham curl position. Confirm bench compatibility."],["Plank","Core","Core","Bodyweight","Anti-Extension","Squeeze glutes, ribs down. Quality beats duration."],["Weighted Plank","Core","Core","Plate","Anti-Extension","Plate on the upper back. Progress past the 60-second plank."],["Side Plank","Core","Obliques","Bodyweight","Anti-Lateral Flexion","Hips stacked and high. Both sides."],["RKC Plank","Core","Core","Bodyweight","Anti-Extension","Max tension everywhere for 10-20 seconds. Harder than it sounds."],["Hanging Knee Raise","Core","Lower Abs","Rack Pull-Up Bar","Hip Flexion","No swinging. Curl the pelvis up, don't just lift the legs."],["Hanging Leg Raise","Core","Lower Abs","Rack Pull-Up Bar","Hip Flexion","Straight legs to parallel or higher. Advanced."],["Cable Crunch (Kneeling)","Core","Abs","Functional Trainer + Rope","Spinal Flexion","Kneel facing the trainer, rope at the head. Crunch with the abs, not the hips."],["Cable Woodchop (High to Low)","Core","Obliques","Functional Trainer + Rope","Rotation","Pivot the back foot. Golf-specific rotation pattern."],["Cable Woodchop (Low to High)","Core","Obliques","Functional Trainer + Rope","Rotation","Drive up and across. Mimics the golf backswing loading."],["Cable Pallof Press","Core","Core","Functional Trainer + D-Handle","Anti-Rotation","Side-on to the pulley, press straight out. Resist the twist."],["Cable Anti-Rotation Hold","Core","Core","Functional Trainer + D-Handle","Anti-Rotation","Arms extended, hold 20-30 seconds. Brutal and quiet."],["Dumbbell Side Bend","Core","Obliques","Dumbbells","Lateral Flexion","One bell only. Don't lean toward the loaded side."],["Dumbbell Russian Twist","Core","Obliques","Dumbbells","Rotation","Seated, feet up. Rotate from the ribs, not the arms."],["Dumbbell Overhead Carry","Core","Core / Shoulders","Dumbbells","Carry","One bell locked out overhead. Walk tall."],["Dead Bug","Core","Core","Bodyweight","Anti-Extension","Low back stays flat on the floor. Opposite arm and leg."],["Bird Dog","Core","Core / Glutes","Bodyweight","Anti-Rotation","Quadruped, opposite arm and leg. No hip tilt."],["Hollow Body Hold","Core","Core","Bodyweight","Anti-Extension","Low back pressed down. Shorten the lever if it lifts."],["Reverse Crunch","Core","Lower Abs","Bodyweight","Spinal Flexion","Curl the hips off the floor. Slow on the way down."],["V-Up","Core","Abs","Bodyweight","Spinal Flexion","Hands and feet meet over the hips."],["Barbell Landmine Rotation","Core","Obliques","Barbell + Landmine","Rotation","Bar end at chest height, sweep side to side. Excellent golf carryover."],["Incline Treadmill Walk (Zone 2)","Conditioning","Cardio","Treadmill","Steady State","10-15% incline, 2.8-3.4 mph, 30-45 min. Heart rate 114-133 bpm. The main fat-loss tool."],["Incline Treadmill Walk (Steep)","Conditioning","Cardio","Treadmill","Steady State","15%+ incline, slower speed. Hold the rails only if you must."],["Treadmill Walk (Flat, Recovery)","Conditioning","Cardio","Treadmill","Recovery","0-3% incline, easy pace. Rest-day movement."],["Treadmill Intervals (Walk/Jog)","Conditioning","Cardio","Treadmill","Interval","Revisit around 200 lb bodyweight. Joint load is high at 235."],["Rower Steady State (Zone 2)","Conditioning","Cardio","Rower","Steady State","20-30 min conversational pace. Legs-core-arms, reverse on the return."],["Rower Intervals 250m","Conditioning","Cardio","Rower","Interval","8-10 rounds, equal rest. Short and sharp."],["Rower Intervals 500m","Conditioning","Cardio","Rower","Interval","5-6 rounds, 90 sec rest. The classic conditioning set."],["Rower Intervals 1000m","Conditioning","Cardio","Rower","Interval","3-4 rounds, 2-3 min rest. Harder than it reads."],["Rower 2000m Time Trial","Conditioning","Cardio","Rower","Test","All out. Retest monthly as a conditioning benchmark."],["Rower Pyramid","Conditioning","Cardio","Rower","Interval","250-500-750-1000-750-500-250m, rest equal to work time."],["Weighted Vest Walk","Conditioning","Cardio","Weighted Vest (Tier 2 buy)","Steady State","20-40 lb vest, flat or light incline. Big calorie bump."],["Dumbbell Farmer Carry Finisher","Conditioning","Conditioning","Dumbbells","Carry","Heavy bells, walk until the grip goes. 3-4 rounds."],["Dumbbell Swing","Conditioning","Conditioning","Dumbbells","Hip Hinge","One bell, hinge and snap the hips. Not a squat, not a front raise."],["Dumbbell Thruster Complex","Conditioning","Conditioning","Dumbbells","Complex","Squat into an overhead press. 10-15 reps gets brutal fast."],["Barbell Complex","Conditioning","Conditioning","Barbell","Complex","Empty or light bar: row, clean, press, squat, RDL. 5 reps each, no rest."],["Treadmill Incline Intervals","Conditioning","Cardio","Treadmill","Interval","3 min at 15%, 2 min at 5%. Repeat 5-6 rounds."],["Outdoor Walk (Steps)","Conditioning","Cardio","None","Steady State","Counts toward the 8-10k daily step target."],["Dumbbell Snatch Intervals","Conditioning","Conditioning","Dumbbells","Complex","One bell, floor to overhead. 30 sec on / 30 sec off."],["Treadmill Warm-Up Walk (5 min)","Warm-Up","General","Treadmill","Warm-Up","Easy incline walk to raise core temperature before lifting."],["Rower Warm-Up (3 min)","Warm-Up","General","Rower","Warm-Up","Light pace. Good general warm-up before pull days."],["Empty Bar Warm-Up Set","Warm-Up","Specific","Barbell","Warm-Up","10-15 reps with just the bar. Groove the pattern."],["Ramp-Up Set (50%)","Warm-Up","Specific","Barbell","Warm-Up","5 reps at 50% of the working weight."],["Ramp-Up Set (70%)","Warm-Up","Specific","Barbell","Warm-Up","3 reps at 70% of the working weight."],["Ramp-Up Set (85%)","Warm-Up","Specific","Barbell","Warm-Up","1-2 reps at 85%. Primes the nervous system, no fatigue."],["Cable External Rotation","Warm-Up","Rotator Cuff","Functional Trainer + D-Handle","Warm-Up","Elbow at the ribs, rotate out. Very light, 15-20 reps."],["Cable Face Pull (Warm-Up)","Warm-Up","Rear Delts","Functional Trainer + Rope","Warm-Up","Light, 20 reps. Wakes up the upper back before pressing."],["Bodyweight Squat Warm-Up","Warm-Up","Legs","Bodyweight","Warm-Up","20 reps, progressively deeper."],["Dead Hang (Warm-Up)","Warm-Up","Lats / Grip","Rack Pull-Up Bar","Warm-Up","30 seconds. Opens the shoulders before pulling."],["Cat-Cow","Mobility - Dynamic","Spine","Bodyweight","Dynamic Mobility","Segment the spine. Breathe out on the round, in on the arch."],["Open Book","Mobility - Dynamic","T-Spine","Bodyweight","Dynamic Mobility","Side-lying, knees stacked. Follow the hand with your eyes."],["Wall Slide","Mobility - Dynamic","Shoulders","Wall","Dynamic Mobility","Forearms on the wall, slide up. Ribs stay down."],["Scap Push-Up","Mobility - Dynamic","Serratus","Bodyweight","Dynamic Mobility","Plank position, arms locked. Only the shoulder blades move."],["Arm Circles","Mobility - Dynamic","Shoulders","Bodyweight","Dynamic Mobility","Small to large, both directions. Blood flow, not stretching."],["Thread the Needle","Mobility - Dynamic","T-Spine","Bodyweight","Dynamic Mobility","Quadruped, reach one arm under the body then up to the ceiling."],["Prone Y-T-W","Mobility - Dynamic","Upper Back","Bench / Floor","Dynamic Mobility","Face down, no weight. Y, then T, then W. 5 each."],["Scap Pull-Up (Mobility)","Mobility - Dynamic","Lower Traps","Rack Pull-Up Bar","Dynamic Mobility","Hang, arms straight, pull the shoulder blades down only."],["Dead Hang (Mobility)","Mobility - Dynamic","Lats / Shoulders","Rack Pull-Up Bar","Dynamic Mobility","Relax into it for 30 seconds. Decompresses the spine."],["90/90 Hip Switch","Mobility - Dynamic","Hips","Bodyweight","Dynamic Mobility","Seated, knees at 90/90, rotate side to side. The single best hip drill."],["Ankle Knee-to-Wall","Mobility - Dynamic","Ankles","Wall","Dynamic Mobility","Toes a few inches from the wall, drive the knee over the toes. Heel down."],["Leg Swings (Front/Back)","Mobility - Dynamic","Hips / Hamstrings","Rack","Dynamic Mobility","Hold the rack, swing one leg. Controlled, 10 per side."],["Leg Swings (Side)","Mobility - Dynamic","Adductors","Rack","Dynamic Mobility","Swing across the body. 10 per side."],["Squat to Stand","Mobility - Dynamic","Hips / Hamstrings","Bodyweight","Dynamic Mobility","Grab the toes, sink to a deep squat, chest up, then straighten the legs."],["Bodyweight Squat (Mobility)","Mobility - Dynamic","Hips","Bodyweight","Dynamic Mobility","10 reps, each one deeper. Pause at the bottom of the last."],["World's Greatest Stretch","Mobility - Dynamic","Hips / T-Spine","Bodyweight","Dynamic Mobility","Lunge, elbow to instep, then rotate up. Hits nearly everything."],["Hip Airplane","Mobility - Dynamic","Hip Rotation","Rack","Dynamic Mobility","Single-leg hinge, rotate the pelvis open and closed. Golf gold."],["Adductor Rock Back","Mobility - Dynamic","Adductors","Bodyweight","Dynamic Mobility","Quadruped, one leg out to the side, rock the hips back."],["Rack Pec Stretch","Mobility - Static","Chest","Rack","Static Stretch","Forearm on the upright, turn away. 45 sec per side."],["Half-Kneeling Hip Flexor Stretch","Mobility - Static","Hip Flexors","Bodyweight / Pad","Static Stretch","Squeeze the back glute HARD, then tuck the pelvis. Don't just lean forward."],["Supine Hamstring Stretch","Mobility - Static","Hamstrings","Bodyweight / Strap","Static Stretch","On your back, one leg up. Other leg stays flat on the floor."],["Lat Stretch on Bench","Mobility - Static","Lats","Bench","Static Stretch","Kneel, elbows on the bench, sink the chest toward the floor."],["Elevated Hamstring Stretch","Mobility - Static","Hamstrings","Bench","Static Stretch","Heel on the bench, hinge from the hips with a flat back."],["Supine Spinal Twist","Mobility - Static","T-Spine / Glutes","Bodyweight","Static Stretch","On your back, knee across the body. Shoulders stay down."],["Couch Stretch","Mobility - Static","Hip Flexors / Quads","Bench / Wall","Static Stretch","Rear shin vertical against the bench. The hardest and best hip flexor stretch."],["90/90 Hip Hold","Mobility - Static","Hip Rotation","Bodyweight","Static Stretch","Hold the 90/90 position, lean over the front shin."],["Standing Toe Touch","Mobility - Static","Hamstrings","Bodyweight","Static Stretch","Soft knees, hang. Let gravity do it. Your toe-touch benchmark drill."],["Rack Chest Stretch (Low)","Mobility - Static","Chest","Rack","Static Stretch","Hand low on the upright, turn away. Hits the lower pec fibres."],["Child's Pose","Mobility - Static","Lats / Lower Back","Bodyweight","Static Stretch","Knees wide, hips to heels, arms long."],["Pigeon Stretch","Mobility - Static","Glutes / Hip Rotation","Bodyweight / Bench","Static Stretch","Front shin across, hips square. Use the bench if the floor is too aggressive."],["Seated Forward Fold","Mobility - Static","Hamstrings","Bodyweight","Static Stretch","Seated, legs straight, hinge from the hips."],["Standing Quad Stretch","Mobility - Static","Quads","Rack","Static Stretch","Hold the rack, heel to the glute, tuck the pelvis."],["Calf Stretch on Rack","Mobility - Static","Calves","Rack / Plate","Static Stretch","Ball of the foot on a plate, heel drops. Straight leg then bent."],["Cross-Body Shoulder Stretch","Mobility - Static","Rear Delts","Bodyweight","Static Stretch","Arm across the chest, pull with the other forearm."],["Triceps Overhead Stretch","Mobility - Static","Triceps / Lats","Bodyweight","Static Stretch","Hand behind the neck, gently press the elbow back."],["Butterfly Stretch","Mobility - Static","Adductors","Bodyweight","Static Stretch","Soles together, hinge forward from the hips."],["Figure-4 Glute Stretch","Mobility - Static","Glutes","Bodyweight","Static Stretch","Ankle across the opposite knee, pull the far thigh in."],["Seated Thoracic Rotation (Dowel)","Mobility - Golf","T-Spine Rotation","Barbell / Dowel","Golf Mobility","Seated, dowel across the shoulders, knees squeezed. Rotate without the hips moving."],["Half-Kneeling T-Spine Rotation","Mobility - Golf","T-Spine Rotation","Bodyweight","Golf Mobility","Half-kneeling locks the pelvis so the rotation has to come from the ribcage."],["90/90 Hip Internal Rotation Lift-Off","Mobility - Golf","Hip Internal Rotation","Bodyweight","Golf Mobility","From 90/90, lift the back shin off the floor. PGA average is 45 deg per side."],["Seated Hip Internal Rotation Stretch","Mobility - Golf","Hip Internal Rotation","Bench","Golf Mobility","Seated on the bench, sweep one foot out to rotate the thigh inward."],["Wall Angel","Mobility - Golf","Shoulders / T-Spine","Wall","Golf Mobility","Back, head, arms on the wall. Slide up without the low back arching."],["Golf Posture Rotation Drill","Mobility - Golf","T-Spine / Hips","Barbell / Dowel","Golf Mobility","Set your actual golf posture, dowel on the shoulders, rotate to backswing and through."],["Standing Trunk Rotation (Dowel)","Mobility - Golf","T-Spine Rotation","Barbell / Dowel","Golf Mobility","Feet planted, rotate the ribcage. Hips stay quiet."],["Side-Lying Windmill","Mobility - Golf","T-Spine Rotation","Bodyweight","Golf Mobility","Side-lying, top arm sweeps a big circle overhead and back."]],"ramp":[["2026-08-17","Mon","Rest + Walk","20 min flat treadmill walk. Unpack the rack. Weigh in - this is your 235 lb baseline."],["2026-08-18","Tue","Push (ramp)","15 min. Empty bar bench 2x10, empty bar OHP 2x10, push-ups 2x10. Stop early. Full warm-up + cool-down."],["2026-08-19","Wed","Pull (ramp)","15 min. Barbell row 2x10 light, band or assisted pull-ups 2x5, DB curl 2x12. Full warm-up + cool-down."],["2026-08-20","Thu","Legs (ramp)","15 min. Bodyweight squat 2x15, empty bar RDL 2x10, calf raise 2x15. Expect soreness - that's the point."],["2026-08-21","Fri","Push (ramp)","15 min. Same as Tuesday, add ~10-20 lb if Tuesday left you fine."],["2026-08-22","Sat","Pull (ramp)","15 min. Same as Wednesday, slightly heavier."],["2026-08-23","Sun","Legs (ramp)","15 min. Same as Thursday, add light load to the squat."],["2026-08-24","Mon","Rest + Walk","30 min incline walk. Start the 8-10k step habit."],["2026-08-25","Tue","Push (ramp)","20 min. Work up to a moderate bench triple. Still nowhere near failure."],["2026-08-26","Wed","Pull (ramp)","20 min. Work up on rows. Test your max strict pull-ups (don't grind)."],["2026-08-27","Thu","Legs (ramp)","20 min. Work up on squats. TEST THE SAFETY HEIGHT with an empty bar - bail into them deliberately."],["2026-08-28","Fri","Rest + Walk","30-40 min incline walk. Rest up for the test days."],["2026-08-29","Sat","BASELINE TEST - Push + Pull","Find a weight you can do for the TOP of each rep range with 2 reps left in the tank. That number goes in Week 1 TARGET."],["2026-08-30","Sun","BASELINE TEST - Legs","Same for the leg lifts. Conservative beats heroic - the program adds weight for you every week."],["2026-08-31","Mon","Rest + Flexibility Baseline","Run all 6 tests on the Flexibility Tests tab. Take front/side/back photos. Program 1 starts tomorrow."]],"mob":{"warmup":{"push":[{"n":"Cat-Cow","dose":"8 reps","how":"On hands and knees, hands under shoulders and knees under hips. Exhale as you push the floor away and round your upper back toward the ceiling, tucking your chin and tailbone. Inhale as you reverse it: chest forward, tailbone up, eyes up. Move slowly and try to feel the spine moving segment by segment rather than hinging at one spot.","cue":"Round then arch, one vertebra at a time.","url":"https://www.youtube.com/results?search_query=cat+cow+stretch+how+to","pri":false},{"n":"Open Book","dose":"6 / side","how":"Lie on your side with knees bent to 90 degrees and stacked, arms straight out in front at shoulder height. Keep the bottom knee pinned to the floor, then sweep the top arm up and over to the other side like opening a book, turning your head to follow the hand. Let the chest open as far as it will go without the knees lifting. Return under control.","cue":"Side-lying, top arm sweeps open. Follow the hand with your eyes.","url":"https://www.youtube.com/results?search_query=open+book+thoracic+rotation+stretch","pri":false},{"n":"Wall Slide","dose":"10 reps","how":"Stand facing a wall with forearms on it, elbows about shoulder height and shoulder-width apart. Brace your abs so your ribs do not flare, then slide the forearms up the wall as high as you can while keeping contact and keeping the shoulders down away from the ears. Slide back down slowly. If your low back arches, you have gone too far.","cue":"Forearms on the wall, slide up. Ribs stay down.","url":"https://www.youtube.com/results?search_query=wall+slide+shoulder+mobility+exercise","pri":false},{"n":"Scap Push-Up","dose":"10 reps","how":"Get into a push-up or high plank position with arms completely straight and locked. Without bending the elbows at all, let your chest sink slightly as the shoulder blades pinch together, then push the floor away hard so the upper back rounds and the blades spread apart. That small range is the whole rep. It wakes up the serratus, which stabilises everything you press.","cue":"Plank with locked arms. Only the shoulder blades move.","url":"https://www.youtube.com/results?search_query=scapular+push+up+how+to","pri":false},{"n":"Arm Circles","dose":"10 each way","how":"Stand tall with arms out to the sides. Make small circles forward, gradually growing them until you are making the biggest circles your shoulders allow, then reverse and work back down. This is about blood flow and joint fluid, not stretching, so keep it brisk and comfortable.","cue":"Small to large, both directions.","url":"https://www.youtube.com/results?search_query=arm+circles+warm+up+shoulders","pri":false}],"pull":[{"n":"Cat-Cow","dose":"8 reps","how":"On hands and knees, hands under shoulders and knees under hips. Exhale as you push the floor away and round your upper back toward the ceiling, tucking your chin and tailbone. Inhale as you reverse it: chest forward, tailbone up, eyes up. Move slowly and try to feel the spine moving segment by segment rather than hinging at one spot.","cue":"Round then arch, one vertebra at a time.","url":"https://www.youtube.com/results?search_query=cat+cow+stretch+how+to","pri":false},{"n":"Thread the Needle","dose":"6 / side","how":"On hands and knees, slide one arm underneath your body and across, letting that shoulder and the side of your head rest toward the floor. Pause, then reverse it: reach that same arm up toward the ceiling and open the chest, following the hand with your eyes. Keep the hips stacked over the knees the whole time so the rotation comes from the upper back.","cue":"Quadruped, reach one arm under the body, then up.","url":"https://www.youtube.com/results?search_query=thread+the+needle+stretch+thoracic+spine","pri":false},{"n":"Prone Y-T-W","dose":"5 each","how":"Lie face down on the floor or a low incline bench with your forehead resting down. With no weight at all, lift your arms into a Y overhead, lower, then out into a T at shoulder height, lower, then bent into a W with elbows tucked, squeezing the shoulder blades. Five of each. Go light; this is for the small upper back muscles, not the delts.","cue":"Face down, no weight. Y, then T, then W.","url":"https://www.youtube.com/results?search_query=prone+Y+T+W+exercise+upper+back","pri":false},{"n":"Scap Pull-Up (Mobility)","dose":"8 reps","how":"Hang from the pull-up bar with arms completely straight. Without bending the elbows, pull your shoulder blades down and back so your body rises an inch or two, then let it lower again. This teaches the lats to initiate a pull-up and is a good gauge of whether your shoulders are ready to pull.","cue":"Hang with straight arms, pull the shoulder blades down.","url":"https://www.youtube.com/results?search_query=scapular+pull+up+how+to","pri":false},{"n":"Dead Hang (Mobility)","dose":"30 sec","how":"Hang from the pull-up bar with a full grip and let everything relax: shoulders up by the ears is fine here, this is a passive hang. Breathe. Thirty seconds. It decompresses the spine, opens the lats and shoulders, and builds grip for free.","cue":"Just hang and relax for 30 seconds.","url":"https://www.youtube.com/results?search_query=dead+hang+benefits+how+to","pri":false}],"legs":[{"n":"90/90 Hip Switch","dose":"8 / side","how":"Sit on the floor with one leg in front bent to 90 degrees and the other out to the side also bent to 90. Keep the chest tall. Lift both knees and rotate them across to the other side so the positions swap, then back. If sitting upright is hard, put your hands behind you. This is the single most useful hip drill you can do, and it directly trains the internal rotation your golf swing needs.","cue":"Seated, knees at 90/90, rotate side to side.","url":"https://www.youtube.com/results?search_query=90+90+hip+switch+mobility+drill","pri":false},{"n":"Ankle Knee-to-Wall","dose":"10 / side","how":"Stand facing a wall with the toes of one foot a few inches from it. Keeping the heel flat on the floor, drive that knee forward until it touches the wall. If it touches easily, slide the foot further back and try again. Ten controlled reps per side. Ankle range is what lets you squat deep and lets your trail foot work in the swing.","cue":"Drive the knee over the toes with the heel down.","url":"https://www.youtube.com/results?search_query=knee+to+wall+ankle+mobility+test","pri":false},{"n":"Leg Swings (Front/Back)","dose":"10 / side","how":"Hold a rack upright for balance and swing one leg forward and back in a controlled arc, letting the range grow over ten reps. Keep the torso upright and the standing knee soft. This is dynamic, so do not hold the end range.","cue":"Hold the rack, swing one leg front to back.","url":"https://www.youtube.com/results?search_query=leg+swings+front+to+back+warm+up","pri":false},{"n":"Leg Swings (Side)","dose":"10 / side","how":"Facing the rack and holding on, swing one leg across the front of your body and then out to the side, ten times, letting the range build. Keep the hips square and the torso quiet so the movement happens at the hip joint.","cue":"Swing the leg across the body and out.","url":"https://www.youtube.com/results?search_query=lateral+leg+swings+warm+up","pri":false},{"n":"Squat to Stand","dose":"8 reps","how":"Stand with feet shoulder-width, bend forward and grab your toes. Keeping hold of them, pull yourself down into the deepest squat you can with the chest lifted, feeling the hips open. Then, still holding the toes, straighten the legs as much as you can to stretch the hamstrings. That is one rep. Eight of them and your hips and hamstrings are ready to squat.","cue":"Grab the toes, sink to a deep squat, chest up, then straighten.","url":"https://www.youtube.com/results?search_query=squat+to+stand+mobility+drill","pri":false}]},"cooldown":{"push":[{"n":"Rack Pec Stretch","dose":"45 sec / side","how":"Put your forearm flat against a rack upright with the elbow at about shoulder height, then step through and rotate your body away from that arm until you feel the chest open. Breathe and hold, do not bounce. Forty-five seconds per side. Adjust the elbow higher or lower to move the stretch around the chest.","cue":"Forearm on the upright, turn away. 45 sec per side.","url":"https://www.youtube.com/results?search_query=doorway+pec+stretch+how+to","pri":false},{"n":"Half-Kneeling Hip Flexor Stretch","dose":"60 sec / side","how":"Kneel on one knee with the other foot forward, both knees roughly 90 degrees. Put something soft under the down knee. Before you move anything, squeeze the glute on the kneeling side as hard as you can. That posteriorly tilts the pelvis and is where the actual stretch comes from. Only then shift your weight slightly forward. Most people skip the glute squeeze and just lean, which stretches the low back instead of the hip flexor. Sixty seconds per side.","cue":"Squeeze the back glute HARD, then tuck the pelvis.","url":"https://www.youtube.com/results?search_query=half+kneeling+hip+flexor+stretch+glute+squeeze","pri":true},{"n":"Supine Hamstring Stretch","dose":"45 sec / side","how":"Lie on your back with both legs straight. Raise one leg toward the ceiling, holding behind the thigh or using a strap or belt around the foot. The key is that the other leg stays flat on the floor. Keep the raised knee as straight as you can and pull only to a mild, easy tension. Forty-five seconds per side.","cue":"On your back, one leg up, other leg flat.","url":"https://www.youtube.com/results?search_query=supine+hamstring+stretch+with+strap","pri":true}],"pull":[{"n":"Lat Stretch on Bench","dose":"45 sec / side","how":"Kneel in front of the bench and place your elbows on it, hands together or holding a towel. Sit your hips back toward your heels and let your chest sink toward the floor, so you feel it down the sides of your back under the armpits. To bias one side, walk both hands slightly toward the opposite side. Forty-five seconds per side.","cue":"Kneel, elbows on the bench, sink the chest.","url":"https://www.youtube.com/results?search_query=kneeling+lat+stretch+on+bench","pri":false},{"n":"Elevated Hamstring Stretch","dose":"75 sec / side","how":"Put one heel on the bench with the leg straight and toes pointing up. Stand tall, then hinge forward from the hips with a flat back, chest leading, until you feel the hamstring. Do not round the spine to reach further; the flat back is what puts the stretch in the muscle. Seventy-five seconds per side. This is your biggest single hamstring dose of the week.","cue":"Heel on the bench, hinge with a flat back.","url":"https://www.youtube.com/results?search_query=elevated+hamstring+stretch+flat+back","pri":true},{"n":"Supine Spinal Twist","dose":"30 sec / side","how":"Lie on your back, bring one knee up and let it fall across your body toward the floor on the other side, using the opposite hand to guide it. The priority is keeping both shoulder blades on the floor. Turn your head the other way if it is comfortable. Thirty seconds per side.","cue":"On your back, knee across the body, shoulders down.","url":"https://www.youtube.com/results?search_query=supine+spinal+twist+stretch","pri":false}],"legs":[{"n":"Couch Stretch","dose":"90 sec / side","how":"Face away from the bench in a half-kneeling position and place the top of your rear foot up against the pad so the shin is vertical. Squeeze the rear glute hard and tuck the pelvis, then bring the torso upright as far as you can tolerate. This is the most aggressive hip flexor and quad stretch there is, so start with the torso leaned forward and work toward upright over weeks. Ninety seconds per side. Pad the down knee.","cue":"Rear shin vertical against the bench. Squeeze the glute.","url":"https://www.youtube.com/results?search_query=couch+stretch+how+to+progression","pri":true},{"n":"90/90 Hip Hold","dose":"60 sec / side","how":"Sit in the 90/90 position, front leg bent 90 in front and back leg bent 90 out to the side. Sit tall for a moment, then hinge forward over the front shin and hold. You should feel the outside of the front hip. Sixty seconds per side. Swap which leg is in front.","cue":"Hold the 90/90, lean over the front shin.","url":"https://www.youtube.com/results?search_query=90+90+hip+stretch+hold","pri":true},{"n":"Standing Toe Touch","dose":"60 sec","how":"Stand with feet together, soften the knees slightly, and fold forward, letting your arms and head hang heavy. Do not pull or bounce. Just breathe out and let the hamstrings release for a full sixty seconds. This is the same position as your toe-touch benchmark test, so it doubles as practice.","cue":"Soft knees, hang, let gravity do it.","url":"https://www.youtube.com/results?search_query=standing+forward+fold+hamstring+stretch","pri":true}]},"golf":[{"n":"Seated Thoracic Rotation (Dowel)","dose":"8 / side","how":"Sit on the bench with a dowel or empty barbell across the back of your shoulders and squeeze a pad or your fist between your knees. Squeezing the knees locks the pelvis, so any rotation you get has to come from the ribcage rather than the hips. Rotate as far as you can each way, eight per side. This is the direct trainer for the number your swing depends on.","cue":"Dowel on shoulders, knees squeezed, rotate.","url":"https://www.youtube.com/results?search_query=seated+thoracic+rotation+golf+drill","pri":false},{"n":"Half-Kneeling T-Spine Rotation","dose":"8 / side","how":"Half-kneel with hands behind your head. Squeeze the down-side glute to lock the pelvis, then rotate your ribcage toward the up knee, leading with the elbow, and come back. Because the hips cannot help, everything you get is real thoracic range.","cue":"Half-kneeling locks the pelvis. Rotate from the ribs.","url":"https://www.youtube.com/results?search_query=half+kneeling+thoracic+rotation+golf","pri":false},{"n":"Open Book","dose":"8 / side","how":"Lie on your side with knees bent to 90 degrees and stacked, arms straight out in front at shoulder height. Keep the bottom knee pinned to the floor, then sweep the top arm up and over to the other side like opening a book, turning your head to follow the hand. Let the chest open as far as it will go without the knees lifting. Return under control.","cue":"Side-lying, top arm sweeps open. Follow the hand with your eyes.","url":"https://www.youtube.com/results?search_query=open+book+thoracic+rotation+stretch","pri":false},{"n":"Thread the Needle","dose":"8 / side","how":"On hands and knees, slide one arm underneath your body and across, letting that shoulder and the side of your head rest toward the floor. Pause, then reverse it: reach that same arm up toward the ceiling and open the chest, following the hand with your eyes. Keep the hips stacked over the knees the whole time so the rotation comes from the upper back.","cue":"Quadruped, reach one arm under the body, then up.","url":"https://www.youtube.com/results?search_query=thread+the+needle+stretch+thoracic+spine","pri":false},{"n":"Side-Lying Windmill","dose":"6 / side","how":"Lie on your side, knees bent and stacked, arms together straight out in front. Sweep the top arm in a big slow circle up overhead, around behind you, and back to the start, keeping the hand as close to the floor as it will go and letting the chest open. Six per side.","cue":"Top arm sweeps a big circle overhead and back.","url":"https://www.youtube.com/results?search_query=side+lying+windmill+thoracic+mobility","pri":false},{"n":"Wall Angel","dose":"10 reps","how":"Stand with your back against the wall, feet a few inches out, and press the low back flat. Put your arms on the wall in a goalpost shape with the backs of the hands touching. Slide the arms up and down while keeping the hands, elbows, and low back in contact. If the low back arches or the hands lift, stop there; that is your current range.","cue":"Back and arms on the wall, slide up, low back flat.","url":"https://www.youtube.com/results?search_query=wall+angels+exercise+how+to","pri":false},{"n":"90/90 Hip Internal Rotation Lift-Off","dose":"8 / side","how":"Sit in the 90/90 position. Keeping your torso still and hands off the floor if you can, lift the rear leg's shin and knee off the floor by rotating that hip internally. It will be a small movement and it will burn. Hold two seconds, eight reps per side. Tour players average 45 degrees of hip internal rotation on both sides; most people who sit at a desk have 20 to 30, and the difference is where back pain comes from.","cue":"From 90/90, lift the back shin off the floor.","url":"https://www.youtube.com/results?search_query=90+90+hip+internal+rotation+lift+off","pri":false},{"n":"Seated Hip Internal Rotation Stretch","dose":"45 sec / side","how":"Sit on the bench with knees bent and feet on the floor. Keeping the knee still, sweep one foot out to the side, which rotates the thigh bone inward in the socket. Hold at the end range for forty-five seconds per side. Very simple, very effective, and directly targets the tour-average benchmark.","cue":"Seated on the bench, sweep the foot outward.","url":"https://www.youtube.com/results?search_query=seated+hip+internal+rotation+stretch","pri":false},{"n":"Hip Airplane","dose":"6 / side","how":"Hold the rack, stand on one leg and hinge forward so your torso and free leg form a straight line. From there, rotate your pelvis open toward the ceiling, then closed toward the floor, keeping the standing leg still. Slow and small is fine. This trains hip internal and external rotation under load, which is exactly what a golf swing demands.","cue":"Single-leg hinge, rotate the pelvis open and closed.","url":"https://www.youtube.com/results?search_query=hip+airplane+exercise+how+to","pri":false},{"n":"Adductor Rock Back","dose":"10 reps","how":"On hands and knees, extend one leg straight out to the side with the foot flat and the toes pointing forward. Keeping that leg straight, rock your hips back toward your heel until you feel the inner thigh stretch, then rock forward. Ten reps, then switch.","cue":"Quadruped, one leg out to the side, rock the hips back.","url":"https://www.youtube.com/results?search_query=adductor+rock+back+stretch","pri":false},{"n":"Ankle Knee-to-Wall","dose":"10 / side","how":"Stand facing a wall with the toes of one foot a few inches from it. Keeping the heel flat on the floor, drive that knee forward until it touches the wall. If it touches easily, slide the foot further back and try again. Ten controlled reps per side. Ankle range is what lets you squat deep and lets your trail foot work in the swing.","cue":"Drive the knee over the toes with the heel down.","url":"https://www.youtube.com/results?search_query=knee+to+wall+ankle+mobility+test","pri":false},{"n":"Golf Posture Rotation Drill","dose":"10 / side","how":"Take your actual address posture, hinged at the hips with a neutral spine, and hold a dowel or empty bar across your shoulders. Rotate into your backswing position and then through to the finish, keeping the spine angle you started with. The point is to train rotation in the posture you will actually use, not just sitting on a bench.","cue":"Set your real golf posture, dowel on shoulders, rotate.","url":"https://www.youtube.com/results?search_query=golf+posture+rotation+drill+with+club","pri":false}],"tests":[{"n":"Toe Touch","how":"Feet together, knees straight. Measure fingertips to floor in inches (negative = past the floor).","target":"Palms flat on floor"},{"n":"Ankle Knee-to-Wall","how":"Big toe from wall, drive knee to wall with heel down. Measure inches, each side.","target":"5+ in. both sides"},{"n":"Seated Trunk Rotation","how":"Seated on bench, dowel on shoulders, knees squeezed. Degrees rotated each way.","target":"60 deg each way"},{"n":"Hip Internal Rotation","how":"Seated on bench, sweep foot outward. Degrees of shin travel, each side.","target":"45 deg each side (PGA tour average)"},{"n":"Shoulder Flexion","how":"Lie on back, low back flat, arms overhead. Do the hands touch the floor?","target":"Hands flat, low back flat"},{"n":"Thomas Test","how":"Sit on bench edge, roll back, pull one knee in. Does the other thigh rest flat?","target":"Thigh flat on bench"}],"volume":{"Chest / Shoulders":3.0,"Hip Flexors":10.0,"Hamstrings":10.0,"Lats":3.0,"T-Spine":2.0,"Hip Rotation":4.0},"cost":{"Push":5.0,"Pull":5.0,"Legs":6.0}},"ref":{"baseWeight":235,"cal":2400,"protein":190,"fat":75,"carbs":240,"hrLow":114,"hrHigh":133}};
+
+/* ---------------------------------------------------------------- state */
+var KEY = "kb_gym_v1";
+var BLANK = {base:{},logs:{},extras:{},weights:{},ramp:{},tweak:{},flex:{},done:{}};
+var S = loadState();
+function loadState(){
+  var o = JSON.parse(JSON.stringify(BLANK));
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var p = JSON.parse(raw); for(var k in BLANK) if(p[k]) o[k] = p[k]; }
+  }catch(e){}
+  return o;
+}
+var saveTimer = null;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){
+    try{ localStorage.setItem(KEY, JSON.stringify(S)); }
+    catch(e){ toast("Couldn't save — storage may be full"); }
+  }, 120);
+}
+function toast(m){
+  var t = document.getElementById("toast");
+  t.textContent = m; t.classList.add("on");
+  setTimeout(function(){ t.classList.remove("on"); }, 1700);
+}
+
+/* ---------------------------------------------------------------- dates */
+function ds(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function pd(s){ var a=s.split("-").map(Number); return new Date(a[0],a[1]-1,a[2]); }
+function addDays(d,n){ var x=new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
+function daysBetween(a,b){ return Math.round((pd(ds(b))-pd(ds(a)))/86400000); }
+var TODAY = new Date();
+var viewDate = new Date();
+
+var PHASES = [
+  {k:"ramp",   a:"2026-08-17", b:"2026-08-31", label:"Ramp-up"},
+  {k:"p1",     a:"2026-09-01", b:"2026-11-23", label:"Program 1"},
+  {k:"deload", a:"2026-11-24", b:"2026-11-30", label:"Deload"},
+  {k:"p2",     a:"2026-12-01", b:"2027-02-22", label:"Program 2"}
+];
+/* Tue-Thu = session 1, Fri-Sun = session 2. Monday rest. JS getDay: Sun=0. */
+var DTYPE = {0:["legs",2],2:["push",1],3:["pull",1],4:["legs",1],5:["push",2],6:["pull",2]};
+var COLOR = {push:"var(--push)",pull:"var(--pull)",legs:"var(--legs)"};
+
+function phase(d){
+  var s = ds(d);
+  for(var i=0;i<PHASES.length;i++){
+    var p = PHASES[i];
+    if(s >= p.a && s <= p.b) return p;
+  }
+  return null;
+}
+function dayInfo(d){
+  var p = phase(d), s = ds(d);
+  if(!p) return {kind: s < PHASES[0].a ? "pre" : "done"};
+  if(p.k === "ramp"){
+    var e = null;
+    for(var i=0;i<D.ramp.length;i++) if(D.ramp[i][0] === s) e = D.ramp[i];
+    return {kind:"ramp", p:p, entry:e, week:Math.floor(daysBetween(pd(p.a),d)/7)+1};
+  }
+  var pair = DTYPE[d.getDay()];
+  var week = Math.floor(daysBetween(pd(p.a), d)/7)+1;
+  if(!pair) return {kind:"rest", p:p, week:week};
+  var pk = p.k === "deload" ? "dl" : p.k;
+  var info = {kind: p.k==="deload" ? "deload" : "train", p:p, pk:pk,
+              dt:pair[0], sess:pair[1], week:week, color:COLOR[pair[0]]};
+  info.logged = hasLog(pk, info.dt, week, info.sess);
+  return info;
+}
+function progPhase(pk){ return pk === "dl" ? "p1" : pk; }
+
+/* ---------------------------------------------------------------- program access */
+function rows(pk, dt){ return D.program[progPhase(pk)][dt]; }
+function rowFor(pk, dt, name){
+  var rr = rows(pk, dt);
+  for(var i=0;i<rr.length;i++) if(rr[i].n === name) return rr[i];
+  return null;
+}
+function lkey(pk,dt,w,sess,ex){ return [pk,dt,w,sess,ex].join("|"); }
+function bkey(pk,dt,ex){ return [progPhase(pk),dt,ex].join("|"); }
+
+function hasLog(pk,dt,w,sess){
+  var pre = [pk,dt,w,sess,""].join("|");
+  for(var k in S.logs){
+    if(k.indexOf(pre) === 0){
+      var a = S.logs[k];
+      for(var i=0;i<a.length;i++) if(a[i] && a[i].w !== "" && a[i].w != null) return true;
+    }
+  }
+  return false;
+}
+function firstSet(pk,dt,w,sess,ex){
+  var a = S.logs[lkey(pk,dt,w,sess,ex)];
+  if(!a || !a[0]) return null;
+  var s = a[0];
+  if(s.w === "" || s.w == null) return null;
+  return {w:+s.w, r:(s.r===""||s.r==null) ? null : +s.r};
+}
+function adj(r, row){
+  if(r == null) return 0;
+  if(r >= row.mx) return row.inc;
+  if(r < row.mn) return -row.inc;
+  return 0;
+}
+/* Walks forward from base. No data -> +inc (projects the plan).
+   Data -> re-anchor to what actually happened. Driver is session 1 set 1. */
+function target(pk, dt, ex, week){
+  var row = rowFor(pk, dt, ex);
+  if(!row || row.k !== "lift") return null;
+  var b = S.base[bkey(pk,dt,ex)];
+  if(b == null || b === "") return null;
+  var t = +b, pp = progPhase(pk);
+  for(var w=1; w<week; w++){
+    var src = firstSet(pp,dt,w,1,ex) || firstSet(pp,dt,w,2,ex);
+    if(!src) t += row.inc;
+    else t = src.w + adj(src.r, row);
+  }
+  return t;
+}
+function deloadTarget(dt, ex){
+  var t = target("p1", dt, ex, 12);
+  if(t == null) return null;
+  return Math.max(0, Math.round(t*0.6/5)*5);
+}
+
+/* ---------------------------------------------------------------- rest timer */
+var restEnd = 0, restTick = null;
+function startRest(sec){
+  restEnd = Date.now() + sec*1000;
+  document.getElementById("timer").style.display = "flex";
+  clearInterval(restTick);
+  restTick = setInterval(tickRest, 250);
+  tickRest();
+}
+function tickRest(){
+  var left = Math.max(0, Math.round((restEnd - Date.now())/1000));
+  document.getElementById("tval").textContent =
+    Math.floor(left/60)+":"+String(left%60).padStart(2,"0");
+  if(left <= 0){ stopRest(); }
+}
+function stopRest(){
+  clearInterval(restTick); restTick = null;
+  document.getElementById("timer").style.display = "none";
+}
+function addRest(s){ restEnd += s*1000; tickRest(); }
+
+/* ---------------------------------------------------------------- nav */
+var TABS = [["today","Today","\u25CF"],["cal","Calendar","\u25A6"],["plan","Plan","\u2261"],
+            ["mob","Mobility","\u2726"],["you","You","\u25CB"]];
+var tab = "today";
+function go(t){ tab = t; render(); window.scrollTo(0,0); }
+function goDate(s){ viewDate = pd(s); tab = "today"; render(); window.scrollTo(0,0); }
+function renderNav(){
+  document.getElementById("nav").innerHTML = TABS.map(function(t){
+    return '<button class="'+(tab===t[0]?"on":"")+'" onclick="go(\''+t[0]+'\')">'+
+           '<span class="ic">'+t[2]+'</span>'+t[1]+'</button>';
+  }).join("");
+}
+
+/* ---------------------------------------------------------------- header */
+function renderHeader(){
+  var h = document.getElementById("hd");
+  if(tab !== "today"){ h.innerHTML = ""; return; }
+  var i = dayInfo(viewDate);
+  var sub = "";
+  if(i.kind === "train" || i.kind === "rest") sub = i.p.label+" \u00B7 week "+i.week;
+  else if(i.kind === "deload") sub = "Deload week";
+  else if(i.kind === "ramp") sub = "Ramp-up";
+  else if(i.kind === "pre") sub = "Before the program starts";
+  else sub = "Program complete";
+  var isToday = ds(viewDate) === ds(TODAY);
+  h.innerHTML =
+    '<div class="datebar">'+
+      '<button class="arw" onclick="step(-1)" aria-label="Previous day">\u2039</button>'+
+      '<div class="dwrap"><div class="d1">'+
+        viewDate.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})+
+      '</div><div class="d2">'+sub+'</div></div>'+
+      (isToday ? '' : '<button class="todaybtn" onclick="goDate(\''+ds(TODAY)+'\')">Today</button>')+
+      '<button class="arw" onclick="step(1)" aria-label="Next day">\u203A</button>'+
+    '</div>';
+}
+function step(n){ viewDate = addDays(viewDate, n); render(); }
+
+/* ---------------------------------------------------------------- Today */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+function screenToday(){
+  var i = dayInfo(viewDate), h = "";
+  if(i.kind === "pre") return '<div class="wrap"><div class="card"><div class="ch">'+
+    '<div class="exname">Nothing scheduled yet</div><div class="note" style="margin-top:6px">'+
+    'The ramp-up starts Aug 17, 2026. Use the Plan tab to look ahead.</div></div></div></div>';
+  if(i.kind === "done") return '<div class="wrap"><div class="card"><div class="ch">'+
+    '<div class="exname">Program complete</div><div class="note" style="margin-top:6px">'+
+    'Feb 21, 2027 was the last scheduled day. Time to write the next block.</div></div></div></div>';
+
+  if(i.kind === "ramp"){
+    var e = i.entry;
+    h = '<div class="wrap"><div class="eyebrow">Ramp-up</div><h2 class="scr">'+esc(e?e[2]:"Rest")+'</h2>';
+    if(e && e[2].indexOf("BASELINE") === 0)
+      h += '<div class="warn"><b>Baseline test day.</b> Whatever you hit today becomes your Week 1 target. '+
+           'Aim for the top of each rep range with about 2 reps left in the tank, then enter those numbers '+
+           'on the Plan tab. Go conservative — the app adds weight for you every week.</div>';
+    h += '<div class="card"><div class="ch"><div class="note">'+esc(e?e[3]:"Rest day. Walk.")+'</div></div></div>';
+    var dn = !!S.ramp[ds(viewDate)];
+    h += '<button class="btn '+(dn?"on":"")+'" onclick="toggleRamp()">'+(dn?"\u2713 Done":"Mark done")+'</button>';
+    return h+"</div>";
+  }
+
+  if(i.kind === "rest"){
+    h = '<div class="wrap"><div class="eyebrow">'+esc(i.p.label)+' \u00B7 week '+i.week+'</div>'+
+        '<h2 class="scr">Rest day</h2>'+
+        '<div class="card"><div class="ch"><div class="note">'+
+        'Walk 30\u201345 min, easy incline. Hit your 8\u201310k steps. This is where most of the '+
+        'deficit actually gets defended.</div></div></div>'+
+        '<div class="card"><div class="ch"><div class="exname">Optional: golf mobility</div>'+
+        '<div class="note" style="margin-top:5px">12 min. This is the work that pushes your rotation '+
+        'numbers past the threshold the cool-downs alone don\u2019t reach.</div></div>'+
+        '<div style="padding:0 14px 13px"><button class="btn sm" onclick="go(\'mob\');mobTab=\'golf\';render()">Open golf routine</button></div></div>';
+    return h+weighInCard()+"</div>";
+  }
+
+  /* training day */
+  var pk = i.pk, dt = i.dt, w = i.week, sess = i.sess;
+  var rr = rows(pk, dt), deload = i.kind === "deload";
+  h = '<div class="wrap"><div class="eyebrow" style="color:'+i.color+'">'+
+      dt.toUpperCase()+' \u00B7 Session '+sess+'</div>'+
+      '<h2 class="scr">'+(deload ? "Deload" : i.p.label+" \u00B7 week "+w)+'</h2>';
+
+  if(deload) h += '<div class="warn"><b>Deload week.</b> Same exercises, 60% of your week-12 weights, '+
+                  'half the sets. Twelve weeks of adding weight has a cost — this is where you collect it. '+
+                  'It is not optional and it is not a rest week.</div>';
+
+  for(var n=0;n<rr.length;n++){
+    var row = rr[n];
+    if(row.k === "warmup" || row.k === "cooldown") h += routineCard(row, pk, dt, w, sess);
+    else h += exCard(row, pk, dt, w, sess, dt, deload);
+  }
+
+  var ex = S.extras[[pk,dt,w].join("|")] || [];
+  for(var e2=0;e2<ex.length;e2++) h += extraCard(ex[e2], pk, dt, w, sess);
+  h += '<button class="btn" onclick="addExtra()">+ Add exercise</button>';
+  return h + weighInCard() + "</div>";
+}
+
+function routineCard(row, pk, dt, w, sess){
+  var kind = row.k;
+  var list = (kind === "warmup" ? D.mob.warmup : D.mob.cooldown)[dt] || [];
+  var dk = [pk,dt,w,sess,kind].join("|");
+  var done = !!S.done[dk];
+  var open = !!openRoutine[dk];
+  var mins = kind === "warmup" ? 5 : D.mob.cost[dt.charAt(0).toUpperCase()+dt.slice(1)];
+  var h = '<div class="card"><div class="ch" onclick="toggleRoutine(\''+dk+'\')" style="cursor:pointer">'+
+    '<div class="dn"><div class="exname">'+(kind==="warmup"?"Warm-up":"Cool-down stretch")+'</div>'+
+    '<div class="dose">'+mins+' min '+(open?"\u2303":"\u2304")+'</div></div>'+
+    '<div class="meta">'+(kind==="warmup"?"Dynamic, before lifting":"Static holds, after lifting")+
+    ' \u00B7 '+list.length+' drills</div></div>';
+  if(open){
+    for(var i=0;i<list.length;i++){
+      var d = list[i];
+      h += '<div class="drill'+(d.pri?" pri":"")+'"><div class="dn"><b>'+esc(d.n)+'</b>'+
+           '<span class="dose">'+esc(d.dose)+'</span></div>'+
+           '<div class="dhow">'+esc(d.how)+'</div>'+
+           '<a class="vid" href="'+d.url+'" target="_blank" rel="noopener">\u25B6 How to</a></div>';
+    }
+  }
+  h += '<div style="padding:11px 14px"><button class="btn sm '+(done?"on":"")+'" '+
+       'onclick="toggleDone(\''+dk+'\')">'+(done?"\u2713 Done":"Mark done")+'</button></div>';
+  return h+"</div>";
+}
+var openRoutine = {};
+function toggleRoutine(k){ openRoutine[k] = !openRoutine[k]; render(); }
+function toggleDone(k){ if(S.done[k]) delete S.done[k]; else S.done[k] = true; save(); render(); }
+function toggleRamp(){
+  var k = ds(viewDate);
+  if(S.ramp[k]) delete S.ramp[k]; else S.ramp[k] = true;
+  save(); render();
+}
+
+function exCard(row, pk, dt, w, sess, cls, deload){
+  var t = deload ? deloadTarget(dt, row.n) : target(pk, dt, row.n, w);
+  var nsets = deload && row.s ? Math.ceil(row.s/2) : row.s;
+  var cardio = row.k === "cardio";
+  var h = '<div class="card '+cls+'"><div class="ch"><div class="exname">'+esc(row.n)+'</div>'+
+    '<div class="meta">'+(cardio ? "Log minutes or meters"
+      : nsets+" sets \u00B7 "+row.mn+"\u2013"+row.mx+" reps \u00B7 "+row.rest+"s rest")+'</div></div>';
+  if(!cardio){
+    h += '<div class="tgtrow"><span class="tgt" style="color:'+(t==null?"var(--dim)":COLOR[dt])+'">'+
+         (t == null ? "\u2014" : t)+'</span><span class="tgtlab">'+
+         (t == null ? "set a starting weight on Plan" : "lb target")+'</span></div>';
+  }
+  var arr = S.logs[lkey(pk,dt,w,sess,row.n)] || [];
+  var count = cardio ? 1 : nsets;
+  for(var s=0;s<count;s++){
+    var v = arr[s] || {w:"",r:""};
+    h += '<div class="setrow"><span class="setn">'+(cardio?"\u2014":s+1)+'</span>'+
+      inp(pk,dt,w,sess,row.n,s,"w",v.w, cardio ? "min / m" : (t==null?"lb":String(t)))+
+      (cardio ? '' : '<span class="x">\u00D7</span>'+
+        inp(pk,dt,w,sess,row.n,s,"r",v.r, row.mn+"\u2013"+row.mx))+
+      (cardio || !row.rest ? '' :
+        '<button class="btn sm" style="flex:0 0 auto;width:52px;padding:9px 0" '+
+        'onclick="startRest('+row.rest+')">'+Math.round(row.rest/60*10)/10+'m</button>')+
+      '</div>';
+  }
+  if(row.cue) h += '<div style="padding:9px 14px 12px"><div class="dcue">'+esc(row.cue)+'</div></div>';
+  return h+"</div>";
+}
+function inp(pk,dt,w,sess,ex,s,f,val,ph){
+  var id = [pk,dt,w,sess,ex,s,f].join("\u0001");
+  return '<input class="inp'+(val!==""&&val!=null?" filled":"")+'" inputmode="decimal" '+
+         'placeholder="'+esc(ph)+'" value="'+esc(val==null?"":val)+'" '+
+         'oninput="setLog(this,\''+esc(id).replace(/\u0001/g,"\\u0001")+'\')">';
+}
+function setLog(el, id){
+  var a = id.split("\u0001");
+  var key = lkey(a[0],a[1],a[2],a[3],a[4]), s = +a[5], f = a[6];
+  if(!S.logs[key]) S.logs[key] = [];
+  while(S.logs[key].length <= s) S.logs[key].push({w:"",r:""});
+  S.logs[key][s][f] = el.value;
+  el.classList.toggle("filled", el.value !== "");
+  save();
+}
+
+function extraCard(name, pk, dt, w, sess){
+  var arr = S.logs[lkey(pk,dt,w,sess,name)] || [];
+  var h = '<div class="card"><div class="ch"><div class="dn"><div class="exname">'+esc(name)+'</div>'+
+    '<button class="dose" onclick="removeExtra(\''+esc(name).replace(/'/g,"\\'")+'\')">remove</button></div>'+
+    '<div class="meta">Extra \u00B7 this week only \u00B7 no auto-progression</div></div>';
+  for(var s=0;s<4;s++){
+    var v = arr[s] || {w:"",r:""};
+    h += '<div class="setrow"><span class="setn">'+(s+1)+'</span>'+
+      inp(pk,dt,w,sess,name,s,"w",v.w,"lb")+'<span class="x">\u00D7</span>'+
+      inp(pk,dt,w,sess,name,s,"r",v.r,"reps")+'</div>';
+  }
+  return h+"</div>";
+}
+function addExtra(){
+  var i = dayInfo(viewDate);
+  var list = D.lists[i.dt];
+  var name = window.prompt("Exercise name (type any part, or paste from the Plan tab):", "");
+  if(!name) return;
+  var lower = name.toLowerCase(), match = null;
+  for(var j=0;j<list.length;j++){
+    if(list[j].toLowerCase() === lower){ match = list[j]; break; }
+    if(!match && list[j].toLowerCase().indexOf(lower) >= 0) match = list[j];
+  }
+  var chosen = match || name;
+  var k = [i.pk,i.dt,i.week].join("|");
+  if(!S.extras[k]) S.extras[k] = [];
+  if(S.extras[k].indexOf(chosen) < 0) S.extras[k].push(chosen);
+  save(); render();
+  toast("Added "+chosen);
+}
+function removeExtra(name){
+  var i = dayInfo(viewDate), k = [i.pk,i.dt,i.week].join("|");
+  var a = S.extras[k] || [];
+  var x = a.indexOf(name); if(x >= 0) a.splice(x,1);
+  save(); render();
+}
+
+function weighInCard(){
+  var k = ds(viewDate), v = S.weights[k];
+  return '<div class="card"><div class="ch"><div class="dn"><div class="exname">Weigh-in</div>'+
+    '<span class="dose">'+(v!=null&&v!==""?v+" lb":"\u2014")+'</span></div>'+
+    '<div class="meta">Morning, after the bathroom, before food</div></div>'+
+    '<div class="setrow"><input class="inp'+(v!=null&&v!==""?" filled":"")+'" inputmode="decimal" '+
+    'placeholder="lb" value="'+(v==null?"":v)+'" oninput="setWeight(this.value)"></div></div>';
+}
+function setWeight(v){
+  var k = ds(viewDate);
+  if(v === "") delete S.weights[k]; else S.weights[k] = v;
+  save();
+}
+
+/* ---------------------------------------------------------------- Calendar */
+var calCursor = null;
+function screenCal(){
+  if(!calCursor) calCursor = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+  var y = calCursor.getFullYear(), m = calCursor.getMonth();
+  var first = new Date(y,m,1), start = new Date(y,m,1-first.getDay());
+  var h = '<div class="wrap">'+
+    '<div class="datebar" style="padding:0 0 12px">'+
+      '<button class="arw" onclick="calStep(-1)">\u2039</button>'+
+      '<div class="dwrap"><div class="d1">'+
+        first.toLocaleDateString(undefined,{month:"long",year:"numeric"})+'</div></div>'+
+      '<button class="arw" onclick="calStep(1)">\u203A</button>'+
+    '</div><div class="cal">';
+  ["S","M","T","W","T","F","S"].forEach(function(d){ h += '<div class="dow">'+d+'</div>'; });
+
+  for(var n=0;n<42;n++){
+    var d = addDays(start,n), i = dayInfo(d), s = ds(d);
+    var off = d.getMonth() !== m, isT = s === ds(TODAY);
+    h += '<button class="cell'+(off?" off":"")+(isT?" today":"")+'" onclick="goDate(\''+s+'\')">'+
+         '<span class="dnum">'+d.getDate()+'</span>';
+    if(i.kind === "train" || i.kind === "deload"){
+      var col = i.color;
+      h += '<span class="dot" style="'+(i.logged
+             ? 'background:'+col+';border-color:'+col
+             : 'border-color:'+col)+'"></span>'+
+           '<span class="sl">'+(i.kind==="deload"?"DL":"S"+i.sess)+'</span>';
+    } else if(i.kind === "ramp"){
+      var e = i.entry, isRest = !e || e[2].indexOf("Rest") === 0;
+      h += '<span class="dot" style="border-color:var(--dim)"></span>'+
+           '<span class="rest">'+(isRest?"walk":"ramp")+'</span>';
+    } else if(i.kind === "rest"){
+      h += '<span class="dot" style="border-color:transparent"></span><span class="rest">rest</span>';
+    } else {
+      h += '<span class="dot" style="border-color:transparent"></span><span class="rest"></span>';
+    }
+    var wv = S.weights[s];
+    h += '<span class="wt">'+(wv!=null&&wv!==""?wv:"")+'</span></button>';
+  }
+  h += '</div>';
+
+  /* footer stats — past and today only */
+  var done = 0, sched = 0;
+  for(var p=0;p<PHASES.length;p++){
+    var ph = PHASES[p];
+    if(ph.k === "ramp") continue;
+    var a = pd(ph.a), b = pd(ph.b);
+    for(var d2=a; ds(d2) <= ds(b); d2 = addDays(d2,1)){
+      if(ds(d2) > ds(TODAY)) break;
+      var ii = dayInfo(d2);
+      if(ii.kind === "train" || ii.kind === "deload"){ sched++; if(ii.logged) done++; }
+    }
+  }
+  var rate = sched ? Math.round(done/sched*100) : null;
+  var rcol = rate == null ? "var(--dim)"
+           : rate >= 85 ? "var(--legs)" : rate >= 65 ? "var(--gold)" : "var(--push)";
+  h += '<div class="stat"><div><div class="v">'+done+'</div><div class="l">Sessions done</div></div>'+
+       '<div><div class="v">'+sched+'</div><div class="l">Scheduled</div></div>'+
+       '<div><div class="v" style="color:'+rcol+'">'+
+       (rate == null ? "\u2014" : rate+"%")+'</div><div class="l">Hit rate</div></div></div>'+
+       '<div class="note" style="margin-top:12px">Filled dot = logged. Hollow = scheduled, not logged. '+
+       'Gold number = that morning\u2019s weigh-in. Tap any day to open it.</div></div>';
+  return h;
+}
+function calStep(n){
+  calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth()+n, 1);
+  render();
+}
+
+/* ---------------------------------------------------------------- Plan */
+var planPhase = "p1", planDay = "push";
+function screenPlan(){
+  var h = '<div class="wrap"><div class="eyebrow">Plan</div><h2 class="scr">12-week projection</h2>'+
+    '<div class="seg">'+["p1","p2"].map(function(p){
+      return '<button class="'+(planPhase===p?"on":"")+'" onclick="planPhase=\''+p+'\';render()">'+
+             (p==="p1"?"Program 1":"Program 2")+'</button>'; }).join("")+'</div>'+
+    '<div class="seg">'+["push","pull","legs"].map(function(d){
+      return '<button class="'+(planDay===d?"on":"")+'" onclick="planDay=\''+d+'\';render()">'+
+             d.charAt(0).toUpperCase()+d.slice(1)+'</button>'; }).join("")+'</div>';
+
+  var rr = rows(planPhase, planDay).filter(function(r){ return r.k === "lift"; });
+  var missing = rr.filter(function(r){ return S.base[bkey(planPhase,planDay,r.n)] == null; }).length;
+  if(missing) h += '<div class="warn">'+missing+' of '+rr.length+' exercises have no starting weight. '+
+    'Enter what you hit on the baseline test days below — everything after week 1 calculates itself.</div>';
+
+  h += '<div class="card"><div class="ch"><div class="exname">Starting weights (week 1)</div>'+
+       '<div class="meta">From the Aug 29\u201330 baseline tests. Editable any time.</div></div>';
+  for(var i=0;i<rr.length;i++){
+    var r = rr[i], bk = bkey(planPhase,planDay,r.n), bv = S.base[bk];
+    h += '<div class="setrow"><span style="flex:1;font-size:13.5px;min-width:0">'+esc(r.n)+'</span>'+
+      '<input class="inp'+(bv!=null?" filled":"")+'" style="flex:0 0 88px" inputmode="decimal" '+
+      'placeholder="lb" value="'+(bv==null?"":bv)+'" '+
+      'oninput="setBase(\''+esc(bk).replace(/'/g,"\\'")+'\',this.value)"></div>';
+  }
+  h += '</div>';
+
+  if(planPhase === "p2") h += '<div class="warn"><b>Start fresh.</b> Do not carry Program 1 numbers into '+
+    'these lifts — different exercises, different leverages. Put in about 85\u201390% of your best guess '+
+    'and let it climb.</div>';
+
+  h += '<div class="scrollx"><table class="plan"><tr><th style="text-align:left">Exercise</th>';
+  for(var w=1;w<=12;w++) h += "<th>"+w+"</th>";
+  h += "</tr>";
+  for(var j=0;j<rr.length;j++){
+    h += '<tr><td class="ex">'+esc(rr[j].n)+'</td>';
+    for(var w2=1;w2<=12;w2++){
+      var t = target(planPhase, planDay, rr[j].n, w2);
+      h += "<td"+(t==null?' style="color:var(--dim)"':"")+">"+(t==null?"\u2014":t)+"</td>";
+    }
+    h += "</tr>";
+  }
+  h += '</table></div><div class="note" style="margin-top:11px">Projection assumes you hit the top of '+
+       'each rep range. Log a real set and every week after it recalculates from what actually happened.</div>';
+  return h+"</div>";
+}
+function setBase(k,v){
+  if(v === "") delete S.base[k]; else S.base[k] = +v;
+  save();
+  clearTimeout(planTimer);
+  planTimer = setTimeout(render, 500);
+}
+var planTimer = null;
+
+/* ---------------------------------------------------------------- Mobility */
+var mobTab = "routines", mobDay = "push";
+function screenMob(){
+  var h = '<div class="wrap"><div class="eyebrow">Mobility</div><h2 class="scr">Move better</h2>'+
+    '<div class="seg">'+[["routines","Routines"],["golf","Golf"],["tests","Tests"]].map(function(t){
+      return '<button class="'+(mobTab===t[0]?"on":"")+'" onclick="mobTab=\''+t[0]+'\';render()">'+
+             t[1]+'</button>'; }).join("")+'</div>';
+
+  if(mobTab === "routines"){
+    h += '<div class="seg">'+["push","pull","legs"].map(function(d){
+      return '<button class="'+(mobDay===d?"on":"")+'" onclick="mobDay=\''+d+'\';render()">'+
+             d.charAt(0).toUpperCase()+d.slice(1)+'</button>'; }).join("")+'</div>';
+    var cap = mobDay.charAt(0).toUpperCase()+mobDay.slice(1);
+    h += drillCard("Before \u00B7 5 min", "Dynamic. Never static-stretch heavy muscles right before you load them \u2014 it measurably drops force output.", D.mob.warmup[mobDay], "");
+    h += drillCard("After \u00B7 "+D.mob.cost[cap]+" min", "Static holds. Amber drills are the priority ones \u2014 hip flexors and hamstrings, your two tightest areas.", D.mob.cooldown[mobDay], "");
+    h += '<div class="card"><div class="ch"><div class="exname">Weekly volume</div>'+
+         '<div class="meta">Each day runs twice a week</div></div>';
+    var v = D.mob.volume, keys = Object.keys(v).sort(function(a,b){ return v[b]-v[a]; });
+    for(var i=0;i<keys.length;i++){
+      h += '<div class="hist" style="padding:8px 14px"><span>'+esc(keys[i])+'</span>'+
+           '<span class="hv" style="color:'+(v[keys[i]]>=10?"var(--legs)":"var(--mut)")+'">'+
+           v[keys[i]].toFixed(1)+' min</span></div>';
+    }
+    h += '<div style="padding:11px 14px"><div class="note">About 10 min per week per muscle group is '+
+         'what produces lasting change \u2014 and intensity doesn\u2019t matter, so easy stretching works '+
+         'as well as painful stretching. The golf routine is what lifts rotation over the line.</div></div></div>';
+  }
+
+  if(mobTab === "golf"){
+    h += '<div class="card"><div class="ch"><div class="note">12 min. Monday, or before a round. '+
+      'Limited thoracic rotation forces the turn into your lower back \u2014 that\u2019s where golfers\u2019 '+
+      'back pain comes from. Tour players average 45\u00B0+ of hip internal rotation on both sides; '+
+      'desk-bound amateurs run 20\u201330\u00B0.</div></div></div>';
+    h += drillCard("Golf routine \u00B7 12 drills", "", D.mob.golf, "golf");
+  }
+
+  if(mobTab === "tests"){
+    h += '<div class="card"><div class="ch"><div class="note">Retest the last day of each month. '+
+      'Same method every time \u2014 consistency beats precision. For two-sided tests, record your '+
+      '<b>worse</b> side: that\u2019s the one limiting your swing.</div></div></div>';
+    for(var t=0;t<D.mob.tests.length;t++){
+      var test = D.mob.tests[t], hist = S.flex[test.n] || [];
+      h += '<div class="card"><div class="ch"><div class="dn"><div class="exname">'+esc(test.n)+'</div>'+
+        '<span class="dose">'+esc(test.target)+'</span></div>'+
+        '<div class="dhow">'+esc(test.how)+'</div></div>'+
+        '<div class="setrow"><input class="inp" id="fx'+t+'" inputmode="decimal" placeholder="reading">'+
+        '<button class="btn sm" style="flex:0 0 auto;width:78px" onclick="saveFlex('+t+')">Save</button></div>';
+      if(hist.length){
+        h += '<div style="padding:2px 14px 12px">';
+        for(var k=hist.length-1;k>=0;k--)
+          h += '<div class="hist"><span>'+hist[k].d+'</span><span class="hv">'+hist[k].v+'</span></div>';
+        if(hist.length > 1){
+          var chg = (+hist[hist.length-1].v) - (+hist[0].v);
+          h += '<div class="hist"><span style="color:var(--dim)">Change from baseline</span>'+
+               '<span class="hv" style="color:var(--gold)">'+(chg>0?"+":"")+chg.toFixed(1)+'</span></div>';
+        }
+        h += '</div>';
+      }
+      h += '</div>';
+    }
+  }
+  return h+"</div>";
+}
+function drillCard(title, note, list, cls){
+  var h = '<div class="card"><div class="ch"><div class="exname">'+title+'</div>'+
+          (note ? '<div class="note" style="margin-top:5px">'+note+'</div>' : '')+'</div>';
+  for(var i=0;i<list.length;i++){
+    var d = list[i];
+    h += '<div class="drill'+(d.pri?" pri":(cls?" "+cls:""))+'">'+
+      '<div class="dn"><b>'+esc(d.n)+'</b><span class="dose">'+esc(d.dose)+'</span></div>'+
+      '<div class="dhow">'+esc(d.how)+'</div>'+
+      '<div class="dcue">'+esc(d.cue)+'</div>'+
+      '<a class="vid" href="'+d.url+'" target="_blank" rel="noopener">\u25B6 How to</a></div>';
+  }
+  return h+"</div>";
+}
+function saveFlex(t){
+  var test = D.mob.tests[t], el = document.getElementById("fx"+t);
+  if(el.value === "") return;
+  if(!S.flex[test.n]) S.flex[test.n] = [];
+  S.flex[test.n].push({d: ds(new Date()), v: el.value});
+  save(); render(); toast("Saved");
+}
+
+/* ---------------------------------------------------------------- You */
+function screenYou(){
+  var ks = Object.keys(S.weights).filter(function(k){ return S.weights[k] !== ""; }).sort();
+  var latest = ks.length ? +S.weights[ks[ks.length-1]] : null;
+  var last7 = ks.slice(-7).map(function(k){ return +S.weights[k]; });
+  var avg = last7.length ? last7.reduce(function(a,b){return a+b;},0)/last7.length : null;
+  var lost = latest != null ? D.ref.baseWeight - latest : null;
+
+  var h = '<div class="wrap"><div class="eyebrow">You</div><h2 class="scr">Progress</h2>'+
+    '<div class="stat"><div><div class="v">'+(avg==null?"\u2014":avg.toFixed(1))+'</div>'+
+      '<div class="l">7-day avg</div></div>'+
+    '<div><div class="v" style="color:'+(lost>0?"var(--legs)":"var(--tx)")+'">'+
+      (lost==null?"\u2014":(lost>0?"-":"+")+Math.abs(lost).toFixed(1))+'</div>'+
+      '<div class="l">lb from start</div></div>'+
+    '<div><div class="v">'+ks.length+'</div><div class="l">weigh-ins</div></div></div>';
+
+  h += '<hr class="sep"><div class="card"><div class="ch"><div class="exname">Daily targets</div>'+
+    '<div class="meta">You track food in MyFitnessPal \u2014 these are just the numbers to put in it</div></div>';
+  [["Calories",D.ref.cal],["Protein",D.ref.protein+" g"],["Fat",D.ref.fat+" g"],
+   ["Carbs",D.ref.carbs+" g"],["Zone 2 HR",D.ref.hrLow+"\u2013"+D.ref.hrHigh+" bpm"]].forEach(function(p){
+    h += '<div class="hist" style="padding:9px 14px"><span>'+p[0]+'</span><span class="hv">'+p[1]+'</span></div>';
+  });
+  h += '<div style="padding:11px 14px"><div class="note">Recalculate every ~15 lb lost. '+
+       'Adjust only after 2\u20133 weeks of a genuinely flat 7-day average \u2014 never off one bad week. '+
+       'Not medical advice.</div></div></div>';
+
+  if(ks.length){
+    h += '<div class="card"><div class="ch"><div class="exname">Weigh-in history</div></div>'+
+         '<div style="padding:2px 14px 12px">';
+    for(var i=ks.length-1;i>=Math.max(0,ks.length-30);i--)
+      h += '<div class="hist"><span>'+ks[i]+'</span><span class="hv">'+S.weights[ks[i]]+' lb</span></div>';
+    h += '</div></div>';
+  }
+
+  h += '<hr class="sep"><div class="warn"><b>Back this up.</b> Everything lives in this browser only. '+
+    'Clearing site data, switching phones, or deleting the app wipes it with no way back. '+
+    'Export after every few sessions.</div>'+
+    '<div class="row2"><button class="btn gold" onclick="exportData()">Export backup</button>'+
+    '<button class="btn" onclick="copyData()">Copy JSON</button></div>'+
+    '<div style="height:9px"></div>'+
+    '<button class="btn" onclick="document.getElementById(\'imp\').style.display=\'block\'">Restore from backup</button>'+
+    '<div id="imp" style="display:none;margin-top:11px">'+
+      '<textarea id="impbox" placeholder="Paste an exported backup here"></textarea>'+
+      '<div style="height:9px"></div>'+
+      '<button class="btn" onclick="importData()">Restore</button></div>'+
+    '<hr class="sep"><button class="btn" style="color:var(--push);border-color:rgba(224,82,75,.4)" '+
+      'onclick="wipe()">Erase all data</button>'+
+    '<div class="note" style="margin-top:19px;color:var(--dim)">Program built from the training system '+
+    'workbook. Progression math matches the spreadsheet exactly. Get physician clearance before starting '+
+    '\u2014 this app is not medical advice.</div>';
+  return h+"</div>";
+}
+function exportData(){
+  var s = JSON.stringify(S,null,2);
+  try{
+    var b = new Blob([s],{type:"application/json"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.download = "gym-backup-"+ds(new Date())+".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+    toast("Backup downloaded");
+  }catch(e){ copyData(); }
+}
+function copyData(){
+  var s = JSON.stringify(S);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(s).then(function(){ toast("Copied — paste it somewhere safe"); },
+      function(){ fallbackCopy(s); });
+  } else fallbackCopy(s);
+}
+function fallbackCopy(s){
+  var ta = document.createElement("textarea");
+  ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); toast("Copied"); }
+  catch(e){ toast("Copy failed — use Export instead"); }
+  document.body.removeChild(ta);
+}
+function importData(){
+  var v = document.getElementById("impbox").value.trim();
+  if(!v) return;
+  var p;
+  try{ p = JSON.parse(v); }
+  catch(e){ toast("That isn't valid backup data"); return; }
+  if(!window.confirm("Replace everything currently logged with this backup?")) return;
+  var o = JSON.parse(JSON.stringify(BLANK));
+  for(var k in BLANK) if(p[k]) o[k] = p[k];
+  S = o; save(); render(); toast("Restored");
+}
+function wipe(){
+  if(!window.confirm("Erase every logged set, weigh-in and test result? This cannot be undone.")) return;
+  if(!window.confirm("Last check — export a backup first if you want to keep any of it. Erase now?")) return;
+  S = JSON.parse(JSON.stringify(BLANK));
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  render(); toast("Erased");
+}
+
+/* ---------------------------------------------------------------- render */
+function render(){
+  renderHeader(); renderNav();
+  var el = document.getElementById("screen");
+  if(tab === "today") el.innerHTML = screenToday();
+  else if(tab === "cal") el.innerHTML = screenCal();
+  else if(tab === "plan") el.innerHTML = screenPlan();
+  else if(tab === "mob") el.innerHTML = screenMob();
+  else el.innerHTML = screenYou();
+}
+render();
+</script>
+</body>
+</html>
